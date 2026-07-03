@@ -7,7 +7,7 @@ A banking-grade Next.js + TypeScript prototype built for SBI hackathon demos, wi
 - Explicit multi-agent orchestration with a visible workflow
 - Governance and audit-first decision support across every module
 - Business-value lead scoring with explainability and regulatory signals
-- Segment-aware offer recommendation, multilingual communication, and campaign optimization
+- Segment-aware offer recommendation, governance-aware personalized bundles, and campaign optimization
 - Realistic Video KYC flow with exception routing, spoof-risk signaling, and manual review handling
 - Tailwind-powered enterprise UI with audit timeline and governance panel
 
@@ -43,4 +43,5 @@ Open `http://localhost:3000`
 - The platform is intentionally presented as reviewable and not fully autonomous.
 - Every stage emits audit records and governance signals for compliance review.
 - The UI is styled with Tailwind for a polished enterprise demo.
+
 # SBI-Agentic-AI
