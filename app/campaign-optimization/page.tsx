@@ -35,7 +35,7 @@ function sparkline(values: number[]) {
     return (
       <div
         key={index}
-        className="w-2 rounded-full bg-gradient-to-t from-sbi.accent to-sky-300"
+        className="w-2 rounded-full bg-gradient-to-t from-brand.accent to-sky-300"
         style={{ height: `${height}px` }}
       />
     );
@@ -101,16 +101,16 @@ export default function CampaignOptimizationPage() {
   }, [simulation.campaigns]);
 
   return (
-    <main className="min-h-screen bg-sbi-surface text-slate-100">
+    <main className="min-h-screen bg-brand-surface text-slate-100">
       <div className="mx-auto max-w-7xl px-6 py-10">
-        <section className="rounded-[2rem] border border-sbi-border bg-sbi-panel/90 p-8 shadow-panel backdrop-blur-xl">
+        <section className="rounded-[2rem] border border-brand-border bg-brand-panel/90 p-8 shadow-panel backdrop-blur-xl">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="space-y-4">
               <Badge>Campaign Optimization Console</Badge>
               <h1 className="max-w-3xl text-4xl font-semibold leading-tight text-white">
                 Business-outcome-first ad optimization for banking campaigns.
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-sbi.muted">
+              <p className="max-w-2xl text-lg leading-8 text-brand.muted">
                 Seeded synthetic campaign performance with premium analytical
                 insights, audience/creative matrix analysis, and budget
                 reallocation modelling.
@@ -119,7 +119,7 @@ export default function CampaignOptimizationPage() {
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center rounded-full border border-sbi-border bg-sbi-surface px-6 py-3 text-sm font-semibold text-sbi.highlight hover:border-sbi.accent transition"
+                className="inline-flex items-center justify-center rounded-full border border-brand-border bg-brand-surface px-6 py-3 text-sm font-semibold text-brand.highlight hover:border-brand.accent transition"
               >
                 Back to home
               </Link>
@@ -128,8 +128,8 @@ export default function CampaignOptimizationPage() {
                 onClick={() => setOptimizeFor("lowCAC")}
                 className={`inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition ${
                   optimizeFor === "lowCAC"
-                    ? "bg-sbi.accent text-slate-950"
-                    : "border border-sbi-border bg-sbi-surface text-sbi.highlight hover:border-sbi.accent"
+                    ? "bg-brand.accent text-slate-950"
+                    : "border border-brand-border bg-brand-surface text-brand.highlight hover:border-brand.accent"
                 }`}
               >
                 Low CAC
@@ -139,8 +139,8 @@ export default function CampaignOptimizationPage() {
                 onClick={() => setOptimizeFor("highQuality")}
                 className={`inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition ${
                   optimizeFor === "highQuality"
-                    ? "bg-sbi.accent text-slate-950"
-                    : "border border-sbi-border bg-sbi-surface text-sbi.highlight hover:border-sbi.accent"
+                    ? "bg-brand.accent text-slate-950"
+                    : "border border-brand-border bg-brand-surface text-brand.highlight hover:border-brand.accent"
                 }`}
               >
                 High-quality activation
@@ -150,8 +150,8 @@ export default function CampaignOptimizationPage() {
         </section>
 
         <section className="mt-8 grid gap-6 lg:grid-cols-4">
-          <article className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-sm uppercase tracking-[0.24em] text-sbi.muted">
+          <article className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-sm uppercase tracking-[0.24em] text-brand.muted">
               Simulation focus
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
@@ -160,26 +160,26 @@ export default function CampaignOptimizationPage() {
                   ?.label
               }
             </h2>
-            <p className="mt-3 text-sm text-sbi.muted">
+            <p className="mt-3 text-sm text-brand.muted">
               {
                 optimizationModes.find((mode) => mode.key === optimizeFor)
                   ?.description
               }
             </p>
           </article>
-          <article className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-sm uppercase tracking-[0.24em] text-sbi.muted">
+          <article className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-sm uppercase tracking-[0.24em] text-brand.muted">
               Total portfolio spend
             </p>
             <p className="mt-4 text-3xl font-semibold text-white">
               {formatCurrency(simulation.totalSpend)}
             </p>
-            <p className="mt-2 text-sm text-sbi.muted">
+            <p className="mt-2 text-sm text-brand.muted">
               Current allocation across {simulation.campaigns.length} campaigns.
             </p>
           </article>
-          <article className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-sm uppercase tracking-[0.24em] text-sbi.muted">
+          <article className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-sm uppercase tracking-[0.24em] text-brand.muted">
               Average outcome metrics
             </p>
             <div className="mt-4 space-y-3">
@@ -203,15 +203,15 @@ export default function CampaignOptimizationPage() {
               </div>
             </div>
           </article>
-          <article className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-sm uppercase tracking-[0.24em] text-sbi.muted">
+          <article className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-sm uppercase tracking-[0.24em] text-brand.muted">
               Recommendation mix
             </p>
             <div className="mt-4 grid gap-3">
               {Object.entries(actionCounts).map(([action, count]) => (
                 <div
                   key={action}
-                  className="rounded-2xl border border-sbi-border bg-sbi-surface/70 p-4"
+                  className="rounded-2xl border border-brand-border bg-brand-surface/70 p-4"
                 >
                   <p className="text-sm text-slate-400 capitalize">{action}</p>
                   <p className="mt-2 text-2xl font-semibold text-white">
@@ -225,17 +225,17 @@ export default function CampaignOptimizationPage() {
 
         <section className="mt-8 grid gap-6 xl:grid-cols-[1.4fr_0.85fr]">
           <div className="space-y-6">
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.24em] text-sbi.muted">
+                  <p className="text-sm uppercase tracking-[0.24em] text-brand.muted">
                     Recommendation spotlight
                   </p>
                   <h2 className="mt-3 text-2xl font-semibold text-white">
                     Campaign actions backed by outcome evidence
                   </h2>
                 </div>
-                <p className="max-w-xl text-sm text-sbi.muted">
+                <p className="max-w-xl text-sm text-brand.muted">
                   Each recommendation is driven by CAC, conversion, KYC,
                   activation and segment quality rather than clicks alone.
                 </p>
@@ -245,14 +245,14 @@ export default function CampaignOptimizationPage() {
                 {topCampaigns.map((campaign) => (
                   <div
                     key={campaign.id}
-                    className="rounded-3xl border border-sbi-border bg-sbi-surface/70 p-5"
+                    className="rounded-3xl border border-brand-border bg-brand-surface/70 p-5"
                   >
                     <div className="flex items-center justify-between gap-3">
                       <div>
                         <p className="text-sm text-slate-400">
                           {campaign.name}
                         </p>
-                        <p className="text-xs uppercase tracking-[0.24em] text-sbi.muted">
+                        <p className="text-xs uppercase tracking-[0.24em] text-brand.muted">
                           {campaign.audience}
                         </p>
                       </div>
@@ -284,11 +284,11 @@ export default function CampaignOptimizationPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h2 className="text-2xl font-semibold text-white">
                 Audience + creative matrix
               </h2>
-              <p className="mt-2 text-sm text-sbi.muted">
+              <p className="mt-2 text-sm text-brand.muted">
                 Compare how creative themes score across the most important
                 banking audiences.
               </p>
@@ -311,7 +311,7 @@ export default function CampaignOptimizationPage() {
                       key={audience}
                       className="grid grid-cols-[1.8fr_repeat(3,minmax(0,1fr))] gap-2 mt-2"
                     >
-                      <div className="rounded-3xl bg-sbi-surface/60 p-3 text-sm font-semibold text-white">
+                      <div className="rounded-3xl bg-brand-surface/60 p-3 text-sm font-semibold text-white">
                         {audience}
                       </div>
                       {simulation.audienceCreativeMatrix
@@ -319,7 +319,7 @@ export default function CampaignOptimizationPage() {
                         .map((row) => (
                           <div
                             key={row.creative}
-                            className="rounded-3xl bg-sbi-panel/70 p-3 text-sm text-slate-300"
+                            className="rounded-3xl bg-brand-panel/70 p-3 text-sm text-slate-300"
                           >
                             <div className="font-semibold text-white">
                               {row.effectiveness}%
@@ -335,7 +335,7 @@ export default function CampaignOptimizationPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h2 className="text-2xl font-semibold text-white">
                 Why cheapest leads are not always best leads
               </h2>
@@ -357,16 +357,16 @@ export default function CampaignOptimizationPage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h2 className="text-2xl font-semibold text-white">
                 Selected campaign trends
               </h2>
-              <p className="mt-2 text-sm text-sbi.muted">
+              <p className="mt-2 text-sm text-brand.muted">
                 Review the selected campaign's CAC, conversion, and KYC
                 performance over four weeks.
               </p>
               <div className="mt-6 space-y-6">
-                <div className="rounded-3xl bg-sbi-surface/70 p-4">
+                <div className="rounded-3xl bg-brand-surface/70 p-4">
                   <div className="flex items-center justify-between text-slate-400 text-sm mb-4">
                     <span>CAC trend</span>
                     <span>
@@ -381,7 +381,7 @@ export default function CampaignOptimizationPage() {
                     )}
                   </div>
                 </div>
-                <div className="rounded-3xl bg-sbi-surface/70 p-4">
+                <div className="rounded-3xl bg-brand-surface/70 p-4">
                   <div className="flex items-center justify-between text-slate-400 text-sm mb-4">
                     <span>Conversion trend</span>
                     <span>
@@ -398,7 +398,7 @@ export default function CampaignOptimizationPage() {
                     )}
                   </div>
                 </div>
-                <div className="rounded-3xl bg-sbi-surface/70 p-4">
+                <div className="rounded-3xl bg-brand-surface/70 p-4">
                   <div className="flex items-center justify-between text-slate-400 text-sm mb-4">
                     <span>KYC completion</span>
                     <span>
@@ -416,11 +416,11 @@ export default function CampaignOptimizationPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h2 className="text-2xl font-semibold text-white">
                 Spend reallocation summary
               </h2>
-              <p className="mt-2 text-sm text-sbi.muted">
+              <p className="mt-2 text-sm text-brand.muted">
                 Before and after budget allocation shows where optimization
                 shifts investment.
               </p>
@@ -428,7 +428,7 @@ export default function CampaignOptimizationPage() {
                 {simulation.budgetAfter.map((budget, index) => (
                   <div
                     key={index}
-                    className="rounded-3xl bg-sbi-surface/70 p-4"
+                    className="rounded-3xl bg-brand-surface/70 p-4"
                   >
                     <div className="flex items-center justify-between gap-3 text-sm text-slate-400">
                       <span>{budget.channel}</span>
@@ -436,7 +436,7 @@ export default function CampaignOptimizationPage() {
                     </div>
                     <div className="mt-3 h-3 overflow-hidden rounded-full bg-slate-800">
                       <div
-                        className="h-full bg-gradient-to-r from-sbi.accent to-sky-400"
+                        className="h-full bg-gradient-to-r from-brand.accent to-sky-400"
                         style={{ width: `${budget.share}%` }}
                       />
                     </div>
@@ -457,7 +457,7 @@ export default function CampaignOptimizationPage() {
           </aside>
         </section>
 
-        <footer className="mt-12 border-t border-sbi-border pt-6 text-sm text-sbi.muted">
+        <footer className="mt-12 border-t border-brand-border pt-6 text-sm text-brand.muted">
           Campaign optimization that balances cost, compliance, and activation
           outcomes.
         </footer>

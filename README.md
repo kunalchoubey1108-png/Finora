@@ -2,6 +2,12 @@
 
 A banking-grade Next.js + TypeScript prototype built for SBI hackathon demos, with governance-first agentic AI for customer acquisition and secure onboarding.
 
+## Live deployment
+
+[Open the Vercel preview](https://temporary-express-basin-f9funk2.vercel.app)
+
+> This anonymous Vercel preview is temporary. Claim it in Vercel before it expires to keep the URL active.
+
 ## What it includes
 
 - Explicit multi-agent orchestration with a visible workflow

@@ -29,10 +29,10 @@ export function DecisionReceiptCard({
   };
 
   return (
-    <div className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6 space-y-6">
-      <div className="flex items-start justify-between border-b border-sbi-border pb-4">
+    <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6 space-y-6">
+      <div className="flex items-start justify-between border-b border-brand-border pb-4">
         <div>
-          <p className="text-xs uppercase tracking-wide text-sbi.muted">
+          <p className="text-xs uppercase tracking-wide text-brand.muted">
             Decision Receipt
           </p>
           <p className="mt-1 font-mono text-xs text-slate-400">
@@ -72,7 +72,7 @@ export function DecisionReceiptCard({
               key={idx}
               className="flex items-start gap-2 text-sm text-slate-300"
             >
-              <span className="text-sbi.accent mt-1">→</span>
+              <span className="text-brand.accent mt-1">→</span>
               <span>{factor}</span>
             </li>
           ))}
@@ -80,14 +80,14 @@ export function DecisionReceiptCard({
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-lg bg-sbi-surface/50 p-3">
-          <p className="text-xs uppercase text-sbi.muted">
+        <div className="rounded-lg bg-brand-surface/50 p-3">
+          <p className="text-xs uppercase text-brand.muted">
             Decision Confidence
           </p>
           <div className="mt-3 flex items-end gap-2">
-            <div className="flex-1 rounded-full bg-sbi-border h-2">
+            <div className="flex-1 rounded-full bg-brand-border h-2">
               <div
-                className="h-2 rounded-full bg-gradient-to-r from-sbi.accent to-sbi.highlight"
+                className="h-2 rounded-full bg-gradient-to-r from-brand.accent to-brand.highlight"
                 style={{ width: `${receipt.confidence}%` }}
               />
             </div>
@@ -96,8 +96,8 @@ export function DecisionReceiptCard({
             </span>
           </div>
         </div>
-        <div className="rounded-lg bg-sbi-surface/50 p-3">
-          <p className="text-xs uppercase text-sbi.muted">Valid Until</p>
+        <div className="rounded-lg bg-brand-surface/50 p-3">
+          <p className="text-xs uppercase text-brand.muted">Valid Until</p>
           <p className="mt-3 text-sm font-semibold text-white">
             {new Date(receipt.validUntil).toLocaleDateString("en-IN")}
           </p>
@@ -113,7 +113,7 @@ export function DecisionReceiptCard({
             {receipt.overrides.map((override: ManualOverride) => (
               <div
                 key={override.id}
-                className="text-xs bg-sbi-surface/50 rounded p-2 border border-amber-500/10"
+                className="text-xs bg-brand-surface/50 rounded p-2 border border-amber-500/10"
               >
                 <p className="text-amber-200 font-mono">
                   {override.overriddenField}
@@ -137,16 +137,16 @@ export function DecisionReceiptCard({
         </div>
       )}
 
-      <div className="flex gap-3 pt-4 border-t border-sbi-border">
+      <div className="flex gap-3 pt-4 border-t border-brand-border">
         <button
           onClick={onDownload}
-          className="flex-1 rounded-lg bg-sbi.accent/10 border border-sbi.accent/30 px-4 py-2 text-sm font-semibold text-sbi.accent hover:bg-sbi.accent/20 transition"
+          className="flex-1 rounded-lg bg-brand.accent/10 border border-brand.accent/30 px-4 py-2 text-sm font-semibold text-brand.accent hover:bg-brand.accent/20 transition"
         >
           Download Receipt
         </button>
         <button
           onClick={onArchive}
-          className="flex-1 rounded-lg bg-sbi-surface/50 border border-sbi-border px-4 py-2 text-sm font-semibold text-slate-300 hover:border-sbi.accent/50 transition"
+          className="flex-1 rounded-lg bg-brand-surface/50 border border-brand-border px-4 py-2 text-sm font-semibold text-slate-300 hover:border-brand.accent/50 transition"
         >
           Archive
         </button>

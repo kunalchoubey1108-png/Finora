@@ -57,7 +57,7 @@ function chooseLead(leadId?: string): LeadProfile {
   )[0];
 }
 
-export function runAgentOrchestration(leadId?: string): AgentFlowReport {
+export function runAgentOrchestration(leadId?: string, bankId?: string): AgentFlowReport {
   const selectedLead = chooseLead(leadId);
   const scoredLead = scoreLead(selectedLead);
   const primarySegment = determinePrimarySegment([scoredLead]);
@@ -102,7 +102,7 @@ export function runAgentOrchestration(leadId?: string): AgentFlowReport {
     ),
   );
 
-  const campaign = optimizeCampaign(strategy, [scoredLead]);
+  const campaign = optimizeCampaign(strategy, [scoredLead], bankId);
   agentResults.push(
     buildAgentResult(
       "Campaign Optimization Agent",
@@ -119,7 +119,7 @@ export function runAgentOrchestration(leadId?: string): AgentFlowReport {
     ),
   );
 
-  const personalization = personalizeCommunication(scoredLead);
+  const personalization = personalizeCommunication(scoredLead, bankId);
   agentResults.push(
     buildAgentResult(
       "Personalization Agent",
@@ -137,7 +137,7 @@ export function runAgentOrchestration(leadId?: string): AgentFlowReport {
     ),
   );
 
-  const offer = recommendOffer(scoredLead);
+  const offer = recommendOffer(scoredLead, bankId);
   const offerEscalated =
     offer.governanceLabel.includes("Manual review") ||
     offer.governanceLabel.includes("Enhanced review");

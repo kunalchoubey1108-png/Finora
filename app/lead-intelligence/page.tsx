@@ -118,7 +118,7 @@ export default function LeadIntelligencePage() {
   }, [scoredLeads]);
 
   return (
-    <main className="min-h-screen bg-sbi-surface text-slate-100">
+    <main className="min-h-screen bg-brand-surface text-slate-100">
       <div className="mx-auto max-w-7xl px-6 py-10">
         {/* Header */}
         <div className="mb-10">
@@ -132,7 +132,7 @@ export default function LeadIntelligencePage() {
         </div>
 
         {/* Controls */}
-        <div className="rounded-lg border border-sbi-border bg-sbi-panel/50 p-6 mb-8 space-y-6">
+        <div className="rounded-lg border border-brand-border bg-brand-panel/50 p-6 mb-8 space-y-6">
           {/* Search */}
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-2">
@@ -143,7 +143,7 @@ export default function LeadIntelligencePage() {
               placeholder="e.g., Ananya, Mumbai"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded-lg border border-sbi-border bg-sbi-surface px-4 py-2 text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+              className="w-full rounded-lg border border-brand-border bg-brand-surface px-4 py-2 text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
             />
           </div>
 
@@ -158,7 +158,7 @@ export default function LeadIntelligencePage() {
                 className={`px-4 py-2 rounded-lg border transition-all ${
                   bandFilter === "All"
                     ? "border-blue-500 bg-blue-500/20 text-blue-300"
-                    : "border-sbi-border bg-sbi-panel/50 text-slate-300 hover:border-slate-400"
+                    : "border-brand-border bg-brand-panel/50 text-slate-300 hover:border-slate-400"
                 }`}
               >
                 All ({scoredLeads.length})
@@ -170,7 +170,7 @@ export default function LeadIntelligencePage() {
                   className={`px-4 py-2 rounded-lg border transition-all ${
                     bandFilter === band
                       ? "border-green-500 bg-green-500/20 text-green-300"
-                      : "border-sbi-border bg-sbi-panel/50 text-slate-300 hover:border-slate-400"
+                      : "border-brand-border bg-brand-panel/50 text-slate-300 hover:border-slate-400"
                   }`}
                 >
                   {band} ({bandCounts[band] ?? 0})
@@ -190,7 +190,7 @@ export default function LeadIntelligencePage() {
                 className={`px-3 py-1.5 text-sm rounded-lg border transition-all ${
                   segmentFilter === "All"
                     ? "border-blue-500 bg-blue-500/20 text-blue-300"
-                    : "border-sbi-border bg-sbi-panel/50 text-slate-300 hover:border-slate-400"
+                    : "border-brand-border bg-brand-panel/50 text-slate-300 hover:border-slate-400"
                 }`}
               >
                 All
@@ -202,7 +202,7 @@ export default function LeadIntelligencePage() {
                   className={`px-3 py-1.5 text-sm rounded-lg border transition-all ${
                     segmentFilter === segment
                       ? "border-green-500 bg-green-500/20 text-green-300"
-                      : "border-sbi-border bg-sbi-panel/50 text-slate-300 hover:border-slate-400"
+                      : "border-brand-border bg-brand-panel/50 text-slate-300 hover:border-slate-400"
                   }`}
                 >
                   {segment}
@@ -222,7 +222,7 @@ export default function LeadIntelligencePage() {
                 className={`px-3 py-1.5 text-sm rounded-lg border transition-all ${
                   personaFilter === "All"
                     ? "border-blue-500 bg-blue-500/20 text-blue-300"
-                    : "border-sbi-border bg-sbi-panel/50 text-slate-300 hover:border-slate-400"
+                    : "border-brand-border bg-brand-panel/50 text-slate-300 hover:border-slate-400"
                 }`}
               >
                 All
@@ -234,7 +234,7 @@ export default function LeadIntelligencePage() {
                   className={`px-3 py-1.5 text-sm rounded-lg border transition-all ${
                     personaFilter === persona
                       ? "border-green-500 bg-green-500/20 text-green-300"
-                      : "border-sbi-border bg-sbi-panel/50 text-slate-300 hover:border-slate-400"
+                      : "border-brand-border bg-brand-panel/50 text-slate-300 hover:border-slate-400"
                   }`}
                 >
                   {persona}
@@ -298,7 +298,7 @@ export default function LeadIntelligencePage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg border border-sbi-border bg-sbi-panel/50 p-12 text-center">
+          <div className="rounded-lg border border-brand-border bg-brand-panel/50 p-12 text-center">
             <p className="text-slate-300">
               No leads match your filters. Try adjusting your criteria.
             </p>
@@ -315,8 +315,8 @@ export default function LeadIntelligencePage() {
             />
 
             {/* Panel */}
-            <div className="w-full max-w-md bg-sbi-panel border-l border-sbi-border overflow-y-auto">
-              <div className="sticky top-0 flex items-center justify-between bg-sbi-panel/95 px-6 py-4 border-b border-sbi-border">
+            <div className="w-full max-w-md bg-brand-panel border-l border-brand-border overflow-y-auto">
+              <div className="sticky top-0 flex items-center justify-between bg-brand-panel/95 px-6 py-4 border-b border-brand-border">
                 <h2 className="text-lg font-semibold text-white">
                   {selectedLead.name}
                 </h2>
@@ -348,7 +348,7 @@ export default function LeadIntelligencePage() {
                                   {dim.score}
                                 </span>
                               </div>
-                              <div className="h-2 bg-sbi-surface rounded-full overflow-hidden">
+                              <div className="h-2 bg-brand-surface rounded-full overflow-hidden">
                                 <div
                                   className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
                                   style={{
@@ -363,7 +363,7 @@ export default function LeadIntelligencePage() {
                     </div>
 
                     {/* Composite Score */}
-                    <div className="bg-sbi-surface/50 rounded-lg p-4 border border-sbi-border">
+                    <div className="bg-brand-surface/50 rounded-lg p-4 border border-brand-border">
                       <div className="text-center">
                         <div className="text-sm text-slate-400 mb-1">
                           Composite Score
@@ -486,7 +486,7 @@ export default function LeadIntelligencePage() {
                 )}
 
                 {/* Challenge & Motivation */}
-                <div className="bg-sbi-surface/50 rounded-lg p-4 border border-sbi-border">
+                <div className="bg-brand-surface/50 rounded-lg p-4 border border-brand-border">
                   <div className="mb-3">
                     <h4 className="text-xs text-slate-400 font-semibold mb-1 uppercase">
                       Challenge

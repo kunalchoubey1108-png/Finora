@@ -58,10 +58,10 @@ export default function AgentFlowPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-sbi-surface text-slate-100">
+      <main className="min-h-screen bg-brand-surface text-slate-100">
         <div className="mx-auto max-w-7xl px-6 py-10">
-          <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-12">
-            <p className="text-center text-lg text-sbi.muted">
+          <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-12">
+            <p className="text-center text-lg text-brand.muted">
               Loading agent orchestration flow…
             </p>
           </div>
@@ -72,9 +72,9 @@ export default function AgentFlowPage() {
 
   if (error || !report) {
     return (
-      <main className="min-h-screen bg-sbi-surface text-slate-100">
+      <main className="min-h-screen bg-brand-surface text-slate-100">
         <div className="mx-auto max-w-7xl px-6 py-10">
-          <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-12">
+          <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-12">
             <p className="text-center text-lg text-red-400">
               {error || "Failed to load agent flow"}
             </p>
@@ -87,48 +87,48 @@ export default function AgentFlowPage() {
   const duration = formatDuration(report.startedAt, report.finishedAt);
 
   return (
-    <main className="min-h-screen bg-sbi-surface text-slate-100">
+    <main className="min-h-screen bg-brand-surface text-slate-100">
       <div className="mx-auto max-w-7xl px-6 py-10">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sbi.highlight hover:text-sbi.accent transition"
+          className="inline-flex items-center gap-2 text-brand.highlight hover:text-brand.accent transition"
         >
           ← Back to Dashboard
         </Link>
 
-        <section className="mt-8 rounded-[2rem] border border-sbi-border bg-sbi-panel/90 p-8 shadow-panel backdrop-blur-xl">
+        <section className="mt-8 rounded-[2rem] border border-brand-border bg-brand-panel/90 p-8 shadow-panel backdrop-blur-xl">
           <div className="space-y-4">
             <Badge>Multi-Agent Orchestration Flow</Badge>
             <h1 className="text-4xl font-semibold text-white">
               Agent Execution Pipeline
             </h1>
-            <p className="max-w-3xl text-lg text-sbi.muted">
+            <p className="max-w-3xl text-lg text-brand.muted">
               Execution ID:{" "}
-              <code className="text-sbi.highlight">{report.executionId}</code>
+              <code className="text-brand.highlight">{report.executionId}</code>
             </p>
           </div>
 
           <div className="mt-6 grid gap-4 md:grid-cols-4">
-            <div className="rounded-2xl bg-sbi-surface p-6">
-              <p className="text-xs uppercase text-sbi.muted">Started</p>
+            <div className="rounded-2xl bg-brand-surface p-6">
+              <p className="text-xs uppercase text-brand.muted">Started</p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {formatTimestamp(report.startedAt)}
               </p>
             </div>
-            <div className="rounded-2xl bg-sbi-surface p-6">
-              <p className="text-xs uppercase text-sbi.muted">Duration</p>
+            <div className="rounded-2xl bg-brand-surface p-6">
+              <p className="text-xs uppercase text-brand.muted">Duration</p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {duration}
               </p>
             </div>
-            <div className="rounded-2xl bg-sbi-surface p-6">
-              <p className="text-xs uppercase text-sbi.muted">Agent Count</p>
+            <div className="rounded-2xl bg-brand-surface p-6">
+              <p className="text-xs uppercase text-brand.muted">Agent Count</p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {report.agentResults.length}
               </p>
             </div>
-            <div className="rounded-2xl bg-sbi-surface p-6">
-              <p className="text-xs uppercase text-sbi.muted">Lead Selected</p>
+            <div className="rounded-2xl bg-brand-surface p-6">
+              <p className="text-xs uppercase text-brand.muted">Lead Selected</p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {report.selectedLeadName}
               </p>
@@ -146,8 +146,8 @@ export default function AgentFlowPage() {
                   onClick={() => setSelectedAgent(agent)}
                   className={`w-full rounded-xl border p-4 text-left transition ${
                     selectedAgent?.auditLogId === agent.auditLogId
-                      ? "border-sbi.accent bg-sbi-panel/80"
-                      : "border-sbi-border bg-sbi-surface/50 hover:border-sbi.accent/50"
+                      ? "border-brand.accent bg-brand-panel/80"
+                      : "border-brand-border bg-brand-surface/50 hover:border-brand.accent/50"
                   }`}
                 >
                   <div className="flex items-start justify-between">
@@ -155,7 +155,7 @@ export default function AgentFlowPage() {
                       <p className="font-semibold text-white">
                         {agent.agentName}
                       </p>
-                      <p className="mt-1 text-xs text-sbi.muted line-clamp-1">
+                      <p className="mt-1 text-xs text-brand.muted line-clamp-1">
                         {agent.decision}
                       </p>
                     </div>
@@ -169,14 +169,14 @@ export default function AgentFlowPage() {
           </div>
 
           {selectedAgent && (
-            <div className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
               <h3 className="text-lg font-semibold text-white">
                 {selectedAgent.agentName}
               </h3>
 
               <div className="mt-4 space-y-4">
                 <div>
-                  <p className="text-xs uppercase text-sbi.muted">Status</p>
+                  <p className="text-xs uppercase text-brand.muted">Status</p>
                   <div className="mt-2">
                     <Badge
                       variant={getStatusBadgeVariant(selectedAgent.status)}
@@ -187,11 +187,11 @@ export default function AgentFlowPage() {
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-sbi.muted">Confidence</p>
+                  <p className="text-xs uppercase text-brand.muted">Confidence</p>
                   <div className="mt-2 flex items-center gap-3">
-                    <div className="flex-1 rounded-full bg-sbi-surface h-2">
+                    <div className="flex-1 rounded-full bg-brand-surface h-2">
                       <div
-                        className="h-2 rounded-full bg-gradient-to-r from-sbi.accent to-sbi.highlight"
+                        className="h-2 rounded-full bg-gradient-to-r from-brand.accent to-brand.highlight"
                         style={{
                           width: `${selectedAgent.confidence}%`,
                         }}
@@ -204,21 +204,21 @@ export default function AgentFlowPage() {
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-sbi.muted">Decision</p>
+                  <p className="text-xs uppercase text-brand.muted">Decision</p>
                   <p className="mt-2 text-sm text-slate-100">
                     {selectedAgent.decision}
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-sbi.muted">Reasoning</p>
+                  <p className="text-xs uppercase text-brand.muted">Reasoning</p>
                   <p className="mt-2 text-sm text-slate-300 leading-relaxed">
                     {selectedAgent.reasoningSummary}
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-sbi.muted">
+                  <p className="text-xs uppercase text-brand.muted">
                     Execution Time
                   </p>
                   <p className="mt-2 text-sm text-slate-100">
@@ -227,15 +227,15 @@ export default function AgentFlowPage() {
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-sbi.muted">Input</p>
-                  <pre className="mt-2 rounded-lg bg-sbi-surface p-3 text-xs overflow-auto max-h-[150px]">
+                  <p className="text-xs uppercase text-brand.muted">Input</p>
+                  <pre className="mt-2 rounded-lg bg-brand-surface p-3 text-xs overflow-auto max-h-[150px]">
                     {JSON.stringify(selectedAgent.input, null, 2)}
                   </pre>
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-sbi.muted">Output</p>
-                  <pre className="mt-2 rounded-lg bg-sbi-surface p-3 text-xs overflow-auto max-h-[200px]">
+                  <p className="text-xs uppercase text-brand.muted">Output</p>
+                  <pre className="mt-2 rounded-lg bg-brand-surface p-3 text-xs overflow-auto max-h-[200px]">
                     {JSON.stringify(selectedAgent.output, null, 2)}
                   </pre>
                 </div>
@@ -244,7 +244,7 @@ export default function AgentFlowPage() {
           )}
         </div>
 
-        <section className="mt-8 rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
+        <section className="mt-8 rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
           <h2 className="text-lg font-semibold text-white">
             Execution Timeline
           </h2>
@@ -253,9 +253,9 @@ export default function AgentFlowPage() {
               (step: (typeof report.timeline)[0], idx: number) => (
                 <div key={idx} className="flex gap-4">
                   <div className="flex flex-col items-center">
-                    <div className="rounded-full bg-sbi.accent w-3 h-3" />
+                    <div className="rounded-full bg-brand.accent w-3 h-3" />
                     {idx < report.timeline.length - 1 && (
-                      <div className="w-1 h-16 bg-sbi-border/50 mt-1" />
+                      <div className="w-1 h-16 bg-brand-border/50 mt-1" />
                     )}
                   </div>
                   <div className="pb-4">
@@ -268,27 +268,27 @@ export default function AgentFlowPage() {
           </div>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
+        <section className="mt-8 rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
           <h2 className="text-lg font-semibold text-white">
             Governance Summary
           </h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl bg-sbi-surface p-4">
-              <p className="text-xs uppercase text-sbi.muted">Review Level</p>
+            <div className="rounded-xl bg-brand-surface p-4">
+              <p className="text-xs uppercase text-brand.muted">Review Level</p>
               <p className="mt-2 font-semibold text-white">
                 {report.governance.reviewLevel}
               </p>
             </div>
-            <div className="rounded-xl bg-sbi-surface p-4">
-              <p className="text-xs uppercase text-sbi.muted">
+            <div className="rounded-xl bg-brand-surface p-4">
+              <p className="text-xs uppercase text-brand.muted">
                 Recommended Reviewer
               </p>
               <p className="mt-2 font-semibold text-white">
                 {report.governance.recommendedReviewer}
               </p>
             </div>
-            <div className="col-span-full rounded-xl bg-sbi-surface p-4">
-              <p className="text-xs uppercase text-sbi.muted">Risk Note</p>
+            <div className="col-span-full rounded-xl bg-brand-surface p-4">
+              <p className="text-xs uppercase text-brand.muted">Risk Note</p>
               <p className="mt-2 text-sm text-slate-100 leading-relaxed">
                 {report.governance.riskNote}
               </p>

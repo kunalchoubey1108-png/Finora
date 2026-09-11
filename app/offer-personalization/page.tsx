@@ -55,9 +55,9 @@ export default function OfferPersonalizationPage() {
     manualOverrides[offer.id] ?? offer.manualOverride;
 
   return (
-    <main className="min-h-screen bg-sbi-surface text-slate-100">
+    <main className="min-h-screen bg-brand-surface text-slate-100">
       <div className="mx-auto max-w-7xl px-6 py-10">
-        <section className="rounded-[2rem] border border-sbi-border bg-sbi-panel/90 p-8 shadow-panel backdrop-blur-xl">
+        <section className="rounded-[2rem] border border-brand-border bg-brand-panel/90 p-8 shadow-panel backdrop-blur-xl">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="space-y-4">
               <Badge>Offer Personalization Studio</Badge>
@@ -65,7 +65,7 @@ export default function OfferPersonalizationPage() {
                 Governance-aware banking offers with explainable eligibility and
                 policy controls.
               </h1>
-              <p className="max-w-2xl text-lg leading-8 text-sbi.muted">
+              <p className="max-w-2xl text-lg leading-8 text-brand.muted">
                 Personalized recommendations, top-3 ranking, declined offer
                 reasoning, and manual review actions for stakeholders.
               </p>
@@ -74,10 +74,10 @@ export default function OfferPersonalizationPage() {
         </section>
 
         <section className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+          <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <p className="text-sm uppercase tracking-[0.24em] text-sbi.muted">
+                <p className="text-sm uppercase tracking-[0.24em] text-brand.muted">
                   Sample customer profile
                 </p>
                 <h2 className="mt-3 text-2xl font-semibold text-white">
@@ -92,8 +92,8 @@ export default function OfferPersonalizationPage() {
                     onClick={() => setSelectedLeadId(lead.id)}
                     className={`rounded-full border px-4 py-2 text-sm transition ${
                       lead.id === selectedLeadId
-                        ? "border-sbi.accent bg-sbi.accent text-slate-950"
-                        : "border-sbi-border bg-sbi-surface text-slate-300 hover:border-slate-400"
+                        ? "border-brand.accent bg-brand.accent text-slate-950"
+                        : "border-brand-border bg-brand-surface text-slate-300 hover:border-slate-400"
                     }`}
                   >
                     {lead.name}
@@ -103,19 +103,19 @@ export default function OfferPersonalizationPage() {
             </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-3">
-              <div className="rounded-3xl bg-sbi-surface/80 p-5">
+              <div className="rounded-3xl bg-brand-surface/80 p-5">
                 <p className="text-sm text-slate-400">Segment</p>
                 <p className="mt-2 text-lg font-semibold text-white">
                   {selectedLead.segment}
                 </p>
               </div>
-              <div className="rounded-3xl bg-sbi-surface/80 p-5">
+              <div className="rounded-3xl bg-brand-surface/80 p-5">
                 <p className="text-sm text-slate-400">Income</p>
                 <p className="mt-2 text-lg font-semibold text-white">
                   {formatCurrency(selectedLead.income)}
                 </p>
               </div>
-              <div className="rounded-3xl bg-sbi-surface/80 p-5">
+              <div className="rounded-3xl bg-brand-surface/80 p-5">
                 <p className="text-sm text-slate-400">Digital affinity</p>
                 <p className="mt-2 text-lg font-semibold text-white">
                   {selectedLead.digitalAffinity}%
@@ -124,13 +124,13 @@ export default function OfferPersonalizationPage() {
             </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <div className="rounded-3xl bg-sbi-surface/80 p-5">
+              <div className="rounded-3xl bg-brand-surface/80 p-5">
                 <p className="text-sm text-slate-400">Recommended top offers</p>
                 <p className="mt-3 text-3xl font-semibold text-white">
                   {eligibleCount}
                 </p>
               </div>
-              <div className="rounded-3xl bg-sbi-surface/80 p-5">
+              <div className="rounded-3xl bg-brand-surface/80 p-5">
                 <p className="text-sm text-slate-400">
                   Declined or deferred offers
                 </p>
@@ -142,18 +142,18 @@ export default function OfferPersonalizationPage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h3 className="text-lg font-semibold text-white">
                 Policy summary
               </h3>
               <p className="mt-3 text-sm text-slate-400">
                 {personalization.policySummary}
               </p>
-              <div className="mt-5 rounded-3xl bg-sbi-surface/80 p-4 text-sm text-slate-300">
+              <div className="mt-5 rounded-3xl bg-brand-surface/80 p-4 text-sm text-slate-300">
                 {personalization.explainableNote}
               </div>
             </div>
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h3 className="text-lg font-semibold text-white">
                 Review guidance
               </h3>
@@ -165,7 +165,7 @@ export default function OfferPersonalizationPage() {
         </section>
 
         <section className="mt-8 space-y-6">
-          <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+          <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
                 <h2 className="text-2xl font-semibold text-white">
@@ -183,7 +183,7 @@ export default function OfferPersonalizationPage() {
               {personalization.topOffers.map((offer) => (
                 <div
                   key={offer.id}
-                  className="rounded-3xl border border-sbi-border bg-sbi-surface/80 p-5"
+                  className="rounded-3xl border border-brand-border bg-brand-surface/80 p-5"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div>
@@ -262,7 +262,7 @@ export default function OfferPersonalizationPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+          <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
                 <h2 className="text-2xl font-semibold text-white">
@@ -280,7 +280,7 @@ export default function OfferPersonalizationPage() {
               {personalization.declinedOffers.map((offer) => (
                 <div
                   key={offer.id}
-                  className="rounded-3xl border border-sbi-border bg-sbi-surface/70 p-5"
+                  className="rounded-3xl border border-brand-border bg-brand-surface/70 p-5"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div>

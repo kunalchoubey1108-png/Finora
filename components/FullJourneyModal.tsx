@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import type { LeadProfile } from "../lib/types";
+import { useBank } from "./BankContext";
 
 // Simple deterministic RNG (mulberry32)
 function mulberry32(a: number) {
@@ -169,6 +170,7 @@ export function FullJourneyModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const { activeBank } = useBank();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [running, setRunning] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
@@ -345,9 +347,7 @@ export function FullJourneyModal({
                     <div>
                       <p className="text-sm text-gray-600">
                         Offer chosen:{" "}
-                        {lead.segment === "Wealth Builder"
-                          ? "SBI Privilege Wealth Account"
-                          : "SBI Smart Savings"}
+                        {activeBank.products[lead.segment] || "Savings Account"}
                       </p>
                     </div>
                   )}
@@ -355,7 +355,7 @@ export function FullJourneyModal({
                     <div>
                       <p className="text-sm text-gray-600">Message preview:</p>
                       <div className="mt-2 p-3 rounded bg-white text-sm border">
-                        Hi {lead.name}, SBI has prepared a tailored onboarding
+                        Hi {lead.name}, {activeBank.name} has prepared a tailored onboarding
                         for you.
                       </div>
                     </div>

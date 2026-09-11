@@ -8,7 +8,7 @@ export function Badge({
   variant?: "default" | "success" | "warning" | "danger";
 }) {
   const colors = {
-    default: "bg-sbi-surface text-sbi.highlight border-sbi-border",
+    default: "bg-brand-surface text-brand.highlight border-brand-border",
     success: "bg-emerald-500/10 text-emerald-200 border-emerald-500/20",
     warning: "bg-amber-500/10 text-amber-200 border-amber-500/20",
     danger: "bg-rose-500/10 text-rose-200 border-rose-500/20",

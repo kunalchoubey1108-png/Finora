@@ -198,26 +198,26 @@ export default function ContentStudioPage() {
   }
 
   return (
-    <main className="min-h-screen bg-sbi-surface text-slate-100">
+    <main className="min-h-screen bg-brand-surface text-slate-100">
       <div className="mx-auto max-w-7xl px-6 py-10">
-        <div className="rounded-[2rem] border border-sbi-border bg-sbi-panel/90 p-8 shadow-panel">
+        <div className="rounded-[2rem] border border-brand-border bg-brand-panel/90 p-8 shadow-panel">
           <h1 className="text-3xl font-semibold text-white">
             Content Personalization Studio
           </h1>
-          <p className="text-sbi.muted mt-2">
+          <p className="text-brand.muted mt-2">
             Generate multilingual, segment-aware communications with compliance
             review and send-to-journey actions.
           </p>
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+          <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
             <div className="flex flex-wrap gap-2">
               {syntheticLeads.map((l) => (
                 <button
                   key={l.id}
                   onClick={() => setLeadId(l.id)}
-                  className={`px-3 py-2 rounded-full ${leadId === l.id ? "bg-sbi.accent text-slate-950" : "bg-sbi-surface text-slate-200"}`}
+                  className={`px-3 py-2 rounded-full ${leadId === l.id ? "bg-brand.accent text-slate-950" : "bg-brand-surface text-slate-200"}`}
                 >
                   {l.name}
                 </button>
@@ -230,7 +230,7 @@ export default function ContentStudioPage() {
                 <select
                   value={channel}
                   onChange={(e) => setChannel(e.target.value as Channel)}
-                  className="w-full rounded p-2 bg-sbi-surface text-white"
+                  className="w-full rounded p-2 bg-brand-surface text-white"
                 >
                   {channels.map((c) => (
                     <option key={c} value={c}>
@@ -246,7 +246,7 @@ export default function ContentStudioPage() {
                   onChange={(e) =>
                     setLanguage(e.target.value as LanguageOption)
                   }
-                  className="w-full rounded p-2 bg-sbi-surface text-white"
+                  className="w-full rounded p-2 bg-brand-surface text-white"
                 >
                   {languages.map((l) => (
                     <option key={l} value={l}>
@@ -262,7 +262,7 @@ export default function ContentStudioPage() {
                   onChange={(e) =>
                     setPersona(e.target.value as PersonaCategory)
                   }
-                  className="w-full rounded p-2 bg-sbi-surface text-white"
+                  className="w-full rounded p-2 bg-brand-surface text-white"
                 >
                   {personas.map((p) => (
                     <option key={p} value={p}>
@@ -284,7 +284,7 @@ export default function ContentStudioPage() {
                 {result.variants.map((v) => (
                   <div
                     key={v.templateId + v.tone}
-                    className="rounded-2xl bg-sbi-surface/80 p-4"
+                    className="rounded-2xl bg-brand-surface/80 p-4"
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -322,7 +322,7 @@ export default function ContentStudioPage() {
                 Generic baseline vs best personalized variant
               </p>
               <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="rounded-2xl bg-sbi-surface/80 p-4">
+                <div className="rounded-2xl bg-brand-surface/80 p-4">
                   <div className="text-sm text-slate-400">Generic</div>
                   <div className="font-semibold text-white mt-2">
                     {result.genericVariant.subject ??
@@ -332,7 +332,7 @@ export default function ContentStudioPage() {
                     {result.genericVariant.body}
                   </div>
                 </div>
-                <div className="rounded-2xl bg-sbi-surface/80 p-4">
+                <div className="rounded-2xl bg-brand-surface/80 p-4">
                   <div className="text-sm text-slate-400">
                     Personalized (best)
                   </div>
@@ -349,13 +349,13 @@ export default function ContentStudioPage() {
               <div className="mt-4 flex items-center gap-3">
                 <button
                   onClick={handleSendSelected}
-                  className="rounded-full px-5 py-2 bg-sbi.accent text-slate-950"
+                  className="rounded-full px-5 py-2 bg-brand.accent text-slate-950"
                 >
                   Send to journey
                 </button>
                 <button
                   onClick={handleExportAll}
-                  className="rounded-full px-5 py-2 border border-sbi-border"
+                  className="rounded-full px-5 py-2 border border-brand-border"
                 >
                   Export copy
                 </button>
@@ -367,7 +367,7 @@ export default function ContentStudioPage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h3 className="text-lg font-semibold text-white">
                 Compliance review
               </h3>
@@ -378,7 +378,7 @@ export default function ContentStudioPage() {
                 {result.variants.map((v) => (
                   <div
                     key={v.templateId + v.tone}
-                    className="rounded-2xl bg-sbi-surface/70 p-3"
+                    className="rounded-2xl bg-brand-surface/70 p-3"
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -396,7 +396,7 @@ export default function ContentStudioPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h3 className="text-lg font-semibold text-white">
                 Send integration
               </h3>
@@ -406,7 +406,7 @@ export default function ContentStudioPage() {
               <div className="mt-4">
                 <button
                   onClick={handleSendSelected}
-                  className="rounded-full px-5 py-2 bg-sbi.accent text-slate-950"
+                  className="rounded-full px-5 py-2 bg-brand.accent text-slate-950"
                 >
                   Send selected variant
                 </button>
@@ -418,7 +418,7 @@ export default function ContentStudioPage() {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-sbi-border bg-sbi-panel/80 p-6">
+            <div className="rounded-3xl border border-brand-border bg-brand-panel/80 p-6">
               <h3 className="text-lg font-semibold text-white">Local Queue</h3>
               <p className="text-sm text-slate-400 mt-2">
                 Queued sends stored locally for demo and replay.
@@ -430,7 +430,7 @@ export default function ContentStudioPage() {
                 {queue.map((it) => (
                   <div
                     key={it.id}
-                    className="rounded-lg bg-sbi-surface/70 p-3 flex items-start justify-between"
+                    className="rounded-lg bg-brand-surface/70 p-3 flex items-start justify-between"
                   >
                     <div className="text-sm">
                       <div className="font-semibold text-white">
@@ -447,13 +447,13 @@ export default function ContentStudioPage() {
                     <div className="flex flex-col gap-2">
                       <button
                         onClick={() => handleReplayQueueItem(it)}
-                        className="px-3 py-1 rounded bg-sbi.accent text-slate-950 text-sm"
+                        className="px-3 py-1 rounded bg-brand.accent text-slate-950 text-sm"
                       >
                         Replay
                       </button>
                       <button
                         onClick={() => handleDeleteQueueItem(it.id)}
-                        className="px-3 py-1 rounded border border-sbi-border text-sm"
+                        className="px-3 py-1 rounded border border-brand-border text-sm"
                       >
                         Delete
                       </button>
@@ -464,7 +464,7 @@ export default function ContentStudioPage() {
               <div className="mt-4 flex gap-3">
                 <button
                   onClick={handleExportQueue}
-                  className="rounded-full px-4 py-2 border border-sbi-border text-sm"
+                  className="rounded-full px-4 py-2 border border-brand-border text-sm"
                 >
                   Export queue
                 </button>

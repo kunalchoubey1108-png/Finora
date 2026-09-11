@@ -3,7 +3,7 @@ import type { OfferCandidate } from "../lib/types";
 export const productBundles: OfferCandidate[] = [
   {
     id: "O-001",
-    name: "SBI Smart Savings + Lifestyle Credit Card",
+    name: `{bank} Smart Savings + Lifestyle Credit Card`,
     bundle: "Savings + Credit Bundle",
     products: ["Smart Savings Account", "Lifestyle Credit Card"],
     description:
@@ -23,7 +23,7 @@ export const productBundles: OfferCandidate[] = [
   },
   {
     id: "O-002",
-    name: "SBI Salary Plus Account + Starter Credit Card",
+    name: `{bank} Salary Plus Account + Starter Credit Card`,
     bundle: "Salary Bundle",
     products: ["Salary Account", "Starter Credit Card"],
     description:
@@ -44,7 +44,7 @@ export const productBundles: OfferCandidate[] = [
   },
   {
     id: "O-003",
-    name: "SBI Merchant Current Account + QR Onboarding",
+    name: `{bank} Merchant Current Account + QR Onboarding`,
     bundle: "Merchant Bundle",
     products: ["Merchant Current Account", "QR Payments Onboarding"],
     description:
@@ -64,7 +64,7 @@ export const productBundles: OfferCandidate[] = [
   },
   {
     id: "O-004",
-    name: "SBI Wealth Builder Portfolio + Advisory Suite",
+    name: `{bank} Wealth Builder Portfolio + Advisory Suite`,
     bundle: "Premium Advisory Bundle",
     products: ["Wealth Account", "Advisory Service"],
     description:

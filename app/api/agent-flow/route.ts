@@ -1,7 +1,17 @@
 import { NextResponse } from "next/server";
 import { runAgentOrchestration } from "../../../lib/agents/orchestrator";
 
-export async function GET() {
-  const report = runAgentOrchestration();
-  return NextResponse.json(report);
+export async function GET(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const leadId = searchParams.get("lead") || undefined;
+    const bankId = searchParams.get("bank") || undefined;
+    const report = runAgentOrchestration(leadId, bankId);
+    return NextResponse.json(report);
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err?.message || String(err) },
+      { status: 500 },
+    );
+  }
 }

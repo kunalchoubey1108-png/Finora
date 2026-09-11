@@ -1,4 +1,5 @@
 import { createAuditRecord } from "./governance";
+import { getBankConfig } from "./bankRegistry";
 import type {
   AcquisitionStrategy,
   CampaignAction,
@@ -160,14 +161,16 @@ export function makeAcquisitionStrategy(
 export function optimizeCampaign(
   strategy: AcquisitionStrategy,
   leads: LeadProfile[],
+  bankId?: string,
 ): CampaignAction {
+  const bank = getBankConfig(bankId);
   const expectedLift = leads[0].score.businessValue > 160000 ? "22%" : "14%";
 
   return {
     action: `Refine campaign targeting by prioritizing high-value segments and governance-approved creative hooks.`,
     optimizationFocus: `Align ${strategy.primaryChannel} spend with leads that show strong business value and controlled compliance exposure.`,
     expectedLift,
-    notes: `Use asset variants that highlight secure SBI digital onboarding and regulated offer transparency.`,
+    notes: `Use asset variants that highlight secure ${bank.name} digital onboarding and regulated offer transparency.`,
     governanceNotes:
       "Exclude sensitive language from ads and ensure every campaign asset is audit-ready.",
   };
@@ -175,7 +178,10 @@ export function optimizeCampaign(
 
 export function personalizeCommunication(
   lead: LeadProfile,
+  bankId?: string,
 ): PersonalizationOutput {
+  const bank = getBankConfig(bankId);
+  const bankName = bank.name;
   const language = lead.preferredLanguage;
   const digitalComfort =
     typeof lead.digitalComfort === "number"
@@ -191,10 +197,10 @@ export function personalizeCommunication(
 
   const headline =
     language === "Hindi"
-      ? `नमस्ते ${lead.name}, SBI आपके लिए विशेष बैंकिंग समाधान लेकर आया है।`
+      ? `नमस्ते ${lead.name}, ${bankName} आपके लिए विशेष बैंकिंग समाधान लेकर आया है।`
       : language === "Marathi"
-        ? `नमस्कार ${lead.name}, SBI तुमच्यासाठी खास बँकिंग ऑफर घेऊन आला आहे.`
-        : `Hi ${lead.name}, SBI has prepared a tailored banking recommendation for you.`;
+        ? `नमस्कार ${lead.name}, ${bankName} तुमच्यासाठी खास बँकिंग ऑफर घेऊन आला आहे.`
+        : `Hi ${lead.name}, ${bankName} has prepared a tailored banking recommendation for you.`;
   const body =
     language === "Hindi"
       ? `आपके वित्तीय लक्ष्यों को देखते हुए, हम एक सुरक्षित डिजिटल ऑनबोर्डिंग, विशेष बचत और क्रेडिट पैकेज की सलाह देते हैं।
@@ -204,7 +210,7 @@ export function personalizeCommunication(
         ? `तुमच्या आर्थिक उद्दिष्टांना ध्यानात घेऊन, आम्ही सुरक्षित डिजिटल ऑनबोर्डिंगसह खास बचत व क्रेडिट पॅकेज सुचवतो.
 
 ही प्रक्रिया पूर्णपणे ऑडिटेबल आहे आणि तुमच्या डेटाचे संरक्षण आमची प्राथमिकता आहे.`
-        : `Based on your profile, SBI recommends a secure digital onboarding journey with a curated savings and credit package.
+        : `Based on your profile, ${bankName} recommends a secure digital onboarding journey with a curated savings and credit package.
 
 This path is fully auditable and aligned with regulatory governance for every decision.`;
 
@@ -220,25 +226,28 @@ Recommended channel: ${recommendedChannel}.`,
   };
 }
 
-export function recommendOffer(lead: LeadProfile): OfferRecommendation {
+export function recommendOffer(lead: LeadProfile, bankId?: string): OfferRecommendation {
+  const bank = getBankConfig(bankId);
+  const recProduct = bank.products[lead.segment] || "Savings Account";
+
   // Map segments to demo-friendly Indian banking product journeys
   const productMap: Record<LeadSegment, OfferRecommendation> = {
     "Urban Growth": {
-      recommendation: "Savings + Salary Account Track",
+      recommendation: recProduct,
       rationale:
         "A salary or primary savings account with instant debit provisioning and UPI setup for urban customers.",
       onboardingTrack: "Self-serve Video KYC with optional branch support",
       governanceLabel: "Auto-approve with monitoring",
     },
     "Premium Emerging": {
-      recommendation: "Privilege Banking + Advisory Track",
+      recommendation: recProduct,
       rationale:
         "High-touch onboarding with advisory and premium banking features for emerging affluent customers.",
       onboardingTrack: "RM-assisted onboarding with enhanced KYC",
       governanceLabel: "Manual review before offer activation",
     },
     "SME Catalyst": {
-      recommendation: "Merchant Current Account + PoS Enablement",
+      recommendation: recProduct,
       rationale:
         "Business current account with payments and working capital support for merchants and SMEs.",
       onboardingTrack:
@@ -246,14 +255,14 @@ export function recommendOffer(lead: LeadProfile): OfferRecommendation {
       governanceLabel: "Enhanced review triggered by business risk signals",
     },
     "Digital Saver": {
-      recommendation: "Student / Starter Savings + Entry Credit Card",
+      recommendation: recProduct,
       rationale:
         "Low-friction student/saver journey with entry-level credit and digital-first onboarding.",
       onboardingTrack: "Mobile-first Video KYC and instant debit provisioning",
       governanceLabel: "Auto-approved with fraud monitoring",
     },
     "Wealth Builder": {
-      recommendation: "Wealth Privilege Account + Advisory Suite",
+      recommendation: recProduct,
       rationale:
         "Premium wealth onboarding with advisory, relationship manager and secure identity validation.",
       onboardingTrack: "RM-assisted onboarding with senior compliance review",

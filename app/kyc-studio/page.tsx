@@ -5,14 +5,14 @@ import type { OnboardingResult, LeadProfile } from "../../lib/types";
 
 const SAMPLE_LEAD: LeadProfile = {
   id: "lead_kyc_demo_1",
-  name: "Ramesh Kumar",
+  name: `{bank} Smart Savings + Lifestyle Credit Card`,
   city: "Mumbai",
   age: 34,
   income: 62000,
   digitalAffinity: 78,
   preferredLanguage: "English",
   persona: {
-    title: "Salaried",
+    title: "{bank} Salary Plus Account + Starter Credit Card",
     archetype: "Urban Professional",
     motivation: "Convenience",
   },
@@ -88,7 +88,7 @@ export default function KYCStudioPage() {
     const body = {
       sessionId: item.id || item.result.sessionId,
       decision,
-      reviewer: "demo.reviewer@sbi",
+      reviewer: "demo.reviewer@bankdemo.com",
       notes: reviewNote,
     };
     const res = await fetch("/api/kyc/review", {
@@ -97,7 +97,7 @@ export default function KYCStudioPage() {
     });
     const data = await res.json();
     if (data?.ok) {
-      // remove from queue
+      /* Default Theme */
       setExceptionQueue((q) => q.filter((_, i) => i !== itemIndex));
       setSelectedException(null);
       setReviewNote("");
@@ -110,7 +110,7 @@ export default function KYCStudioPage() {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">
-        KYC Studio — AI-assisted Onboarding Console
+        KYC Studio — Merchant Current Account + QR Onboarding
       </h1>
 
       <div className="mb-6">
@@ -143,7 +143,7 @@ export default function KYCStudioPage() {
                 onClick={() => setStep(1)}
                 className="mt-3 px-3 py-1 bg-sky-500 text-white"
               >
-                Capture Consent & Continue
+                // Challenge alignment with bank solutions
               </button>
             </div>
           )}
@@ -214,7 +214,7 @@ export default function KYCStudioPage() {
           {step === 4 && (
             <div>
               <p>
-                Summary: Review simulated signals and submit for assessment.
+                rationale: "Fit with bank's product suite and segment offerings",
               </p>
               <ul className="list-disc ml-6">
                 <li>OCR: {ocrOk ? "Good" : "Low confidence"}</li>
@@ -274,7 +274,7 @@ export default function KYCStudioPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-6" data-theme="default">
         <div className="p-4 border rounded">
           <h2 className="font-semibold mb-2">Assessment Result</h2>
           {result ? (

@@ -9,15 +9,15 @@ export const contentTemplates: ContentTemplate[] = [
     persona: ["salaried professional"],
     language: "English",
     tone: "formal",
-    subject: "Secure your SBI savings benefits — personalised for you",
+    subject: "Secure your {bank} savings benefits — personalised for you",
     body: `Dear {name},
 
-Based on your profile, SBI recommends an optimised savings package that provides secure digital onboarding and meaningful rewards. Our recommendation prioritises transactional security and clear benefits, including cashback on select spend categories.
+Based on your profile, {bank} recommends an optimised savings package that provides secure digital onboarding and meaningful rewards. Our recommendation prioritises transactional security and clear benefits, including cashback on select spend categories.
 
 If you would like to proceed, we will guide you through an audit-ready digital KYC process.
 
 Regards,
-SBI Customer Services`,
+{bank} Customer Services`,
     deterministicSeed: "seed-1",
   },
 
@@ -28,7 +28,7 @@ SBI Customer Services`,
     persona: ["student"],
     language: "Hinglish",
     tone: "friendly",
-    body: `Hi {name}! SBI ke naye Student Savings account mein sign up karo aur pao instant rewards. Easy KYC aur student benefits await you. Reply YES to start.`,
+    body: `Hi {name}! {bank} ke naye Student Savings account mein sign up karo aur pao instant rewards. Easy KYC aur student benefits await you. Reply YES to start.`,
     deterministicSeed: "seed-2",
   },
 
@@ -41,7 +41,7 @@ SBI Customer Services`,
     tone: "urgent-but-compliant",
     body: `Hello {name},
 
-Important: Strengthen your business payments with SBI's Merchant Current Account. Immediate QR onboarding can increase transaction certainty. This message is informational; see details before proceeding.`,
+Important: Strengthen your business payments with {bank}'s Merchant Current Account. Immediate QR onboarding can increase transaction certainty. This message is informational; see details before proceeding.`,
     deterministicSeed: "seed-3",
   },
 
@@ -52,7 +52,7 @@ Important: Strengthen your business payments with SBI's Merchant Current Account
     persona: ["premium user"],
     language: "Hindi",
     tone: "premium",
-    body: `Namaste {name}, aapke liye SBI ki vishesh advisory aur wealth bundle uplabdh hai. Personal advisor se baat karne ke liye app mein visit karein.`,
+    body: `Namaste {name}, aapke liye {bank} ki vishesh advisory aur wealth bundle uplabdh hai. Personal advisor se baat karne ke liye app mein visit karein.`,
     deterministicSeed: "seed-4",
   },
 
@@ -63,13 +63,13 @@ Important: Strengthen your business payments with SBI's Merchant Current Account
     persona: ["self-employed"],
     language: "English",
     tone: "friendly",
-    subject: "Tools for your business banking — quick setup with SBI",
+    subject: "Tools for your business banking — quick setup with {bank}",
     body: `Hi {name},
 
 We designed an account bundle to simplify invoicing and cashflow for independent professionals. Enjoy tailored onboarding steps, QR acceptance, and working capital guidance.
 
 Cheers,
-SBI Business Support`,
+{bank} Business Support`,
     deterministicSeed: "seed-5",
   },
 ];

@@ -1,4 +1,5 @@
 import { contentTemplates } from "../data/contentTemplates";
+import { getBankConfig } from "./bankRegistry";
 import type {
   LeadProfile,
   ContentPersonalizationResult,
@@ -58,10 +59,11 @@ function checkCompliance(body: string): ComplianceFlag[] {
   return flags;
 }
 
-function renderTemplate(body: string, lead: LeadProfile) {
+function renderTemplate(body: string, lead: LeadProfile, bankName: string) {
   return body
     .replace(/{name}/g, lead.name)
-    .replace(/{city}/g, lead.city || "your city");
+    .replace(/{city}/g, lead.city || "your city")
+    .replace(/{bank}/g, bankName);
 }
 
 function findTemplate(
@@ -91,7 +93,11 @@ export function generateContentVariants(
   channel: Channel,
   language: LanguageOption,
   persona: PersonaCategory,
+  bankId?: string,
 ): ContentPersonalizationResult {
+  const bank = getBankConfig(bankId);
+  const bankName = bank.name;
+
   const tones: ToneVariant[] = [
     "formal",
     "friendly",
@@ -106,9 +112,9 @@ export function generateContentVariants(
       language,
       tone as ToneVariant,
     );
-    const body = renderTemplate(template.body, lead);
+    const body = renderTemplate(template.body, lead, bankName);
     const subject = template.subject
-      ? template.subject.replace(/{name}/g, lead.name)
+      ? template.subject.replace(/{name}/g, lead.name).replace(/{bank}/g, bankName)
       : undefined;
     const seed = (template.deterministicSeed || template.id) + "|" + tone;
     const engagementScore = predictEngagement(seed, lead);
@@ -141,7 +147,7 @@ export function generateContentVariants(
   // Generic baseline: a neutral template (choose first matching channel)
   const genericTemplate =
     contentTemplates.find((t) => t.channel === channel) || contentTemplates[0];
-  const genericBody = renderTemplate(genericTemplate.body, lead);
+  const genericBody = renderTemplate(genericTemplate.body, lead, bankName);
   const genericSeed =
     (genericTemplate.deterministicSeed || genericTemplate.id) + "|generic";
   const genericVariant: ContentVariant = {
@@ -150,7 +156,7 @@ export function generateContentVariants(
     language,
     tone: "formal",
     subject: genericTemplate.subject
-      ? genericTemplate.subject.replace(/{name}/g, lead.name)
+      ? genericTemplate.subject.replace(/{name}/g, lead.name).replace(/{bank}/g, bankName)
       : undefined,
     body: genericBody,
     engagementScore: predictEngagement(genericSeed, lead),

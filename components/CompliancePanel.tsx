@@ -5,7 +5,7 @@ import type { ComplianceFlag } from "../lib/types";
 export function CompliancePanel({ flags }: { flags: ComplianceFlag[] }) {
   if (!flags || flags.length === 0) {
     return (
-      <div className="rounded-2xl bg-sbi-surface/80 p-4 text-sm text-slate-300">
+      <div className="rounded-2xl bg-brand-surface/80 p-4 text-sm text-slate-300">
         No compliance flags detected.
       </div>
     );

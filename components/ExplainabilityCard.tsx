@@ -24,10 +24,10 @@ export function ExplainabilityCard({
   const confidentEnough = confidence >= 85;
 
   return (
-    <div className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6 space-y-4">
+    <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6 space-y-4">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs uppercase text-sbi.muted">Agent Decision</p>
+          <p className="text-xs uppercase text-brand.muted">Agent Decision</p>
           <p className="mt-2 font-semibold text-white">{agentName}</p>
         </div>
         <Badge
@@ -40,16 +40,16 @@ export function ExplainabilityCard({
       </div>
 
       <div>
-        <p className="text-xs uppercase text-sbi.muted">Decision</p>
+        <p className="text-xs uppercase text-brand.muted">Decision</p>
         <p className="mt-2 text-sm text-slate-100 leading-relaxed">
           {decision}
         </p>
       </div>
 
       <div>
-        <p className="text-xs uppercase text-sbi.muted">Decision Confidence</p>
+        <p className="text-xs uppercase text-brand.muted">Decision Confidence</p>
         <div className="mt-3 flex items-center gap-3">
-          <div className="flex-1 rounded-full bg-sbi-surface h-2.5 overflow-hidden">
+          <div className="flex-1 rounded-full bg-brand-surface h-2.5 overflow-hidden">
             <div
               className={`h-2.5 rounded-full transition-all ${
                 confidence >= 90
@@ -68,14 +68,14 @@ export function ExplainabilityCard({
       </div>
 
       <div>
-        <p className="text-xs uppercase text-sbi.muted">Top Factors</p>
+        <p className="text-xs uppercase text-brand.muted">Top Factors</p>
         <ul className="mt-2 space-y-1">
           {topFactors.map((factor, idx) => (
             <li
               key={idx}
               className="text-xs text-slate-300 flex items-start gap-2"
             >
-              <span className="text-sbi.accent mt-1">•</span>
+              <span className="text-brand.accent mt-1">•</span>
               <span>{factor}</span>
             </li>
           ))}
@@ -83,8 +83,8 @@ export function ExplainabilityCard({
       </div>
 
       {alternativeRecommendation && (
-        <div className="rounded-lg bg-sbi-surface/50 border border-sbi-border/30 p-3">
-          <p className="text-xs uppercase text-sbi.muted">Alternative Option</p>
+        <div className="rounded-lg bg-brand-surface/50 border border-brand-border/30 p-3">
+          <p className="text-xs uppercase text-brand.muted">Alternative Option</p>
           <p className="mt-1 text-xs text-slate-300">
             {alternativeRecommendation}
           </p>

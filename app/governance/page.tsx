@@ -35,14 +35,14 @@ export default function GovernanceDashboardPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-sbi-surface text-slate-100">
+    <main className="min-h-screen bg-brand-surface text-slate-100">
       <div className="mx-auto max-w-7xl px-6 py-10">
         {/* Header */}
         <section className="mb-8">
           <h1 className="text-4xl font-semibold text-white">
             Governance & Compliance Dashboard
           </h1>
-          <p className="mt-2 text-lg text-sbi.muted">
+          <p className="mt-2 text-lg text-brand.muted">
             Real-time oversight of acquisition decisions, policy compliance, and
             fairness metrics
           </p>
@@ -50,8 +50,8 @@ export default function GovernanceDashboardPage() {
 
         {/* Executive Summary Grid */}
         <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-5 mb-8">
-          <div className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-xs uppercase tracking-wide text-sbi.muted">
+          <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-xs uppercase tracking-wide text-brand.muted">
               Today's Decisions
             </p>
             <p className="mt-3 text-3xl font-bold text-white">
@@ -62,11 +62,11 @@ export default function GovernanceDashboardPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-xs uppercase tracking-wide text-sbi.muted">
+          <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-xs uppercase tracking-wide text-brand.muted">
               Manual Review Queue
             </p>
-            <p className="mt-3 text-3xl font-bold text-sbi.highlight">
+            <p className="mt-3 text-3xl font-bold text-brand.highlight">
               {mockMetrics.manualReviewCount}
             </p>
             <p className="mt-2 text-xs text-slate-400">
@@ -74,8 +74,8 @@ export default function GovernanceDashboardPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-xs uppercase tracking-wide text-sbi.muted">
+          <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-xs uppercase tracking-wide text-brand.muted">
               Escalated Cases
             </p>
             <p className="mt-3 text-3xl font-bold text-amber-400">
@@ -84,8 +84,8 @@ export default function GovernanceDashboardPage() {
             <p className="mt-2 text-xs text-slate-400">Requires review today</p>
           </div>
 
-          <div className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-xs uppercase tracking-wide text-sbi.muted">
+          <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-xs uppercase tracking-wide text-brand.muted">
               Overrides
             </p>
             <p className="mt-3 text-3xl font-bold text-slate-100">
@@ -100,8 +100,8 @@ export default function GovernanceDashboardPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
-            <p className="text-xs uppercase tracking-wide text-sbi.muted">
+          <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
+            <p className="text-xs uppercase tracking-wide text-brand.muted">
               Avg Confidence
             </p>
             <p className="mt-3 text-3xl font-bold text-green-400">
@@ -115,7 +115,7 @@ export default function GovernanceDashboardPage() {
 
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
           {/* Risk Distribution */}
-          <section className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
+          <section className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
             <h2 className="text-lg font-semibold text-white">
               Risk Distribution
             </h2>
@@ -140,7 +140,7 @@ export default function GovernanceDashboardPage() {
                           {count} cases
                         </span>
                       </div>
-                      <div className="rounded-full bg-sbi-surface h-2 overflow-hidden">
+                      <div className="rounded-full bg-brand-surface h-2 overflow-hidden">
                         <div
                           className={`h-2 ${
                             tier === "Low"
@@ -164,7 +164,7 @@ export default function GovernanceDashboardPage() {
           </section>
 
           {/* Override Queue by Reviewer */}
-          <section className="rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
+          <section className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
             <h2 className="text-lg font-semibold text-white">
               Reviewer Workload
             </h2>
@@ -173,7 +173,7 @@ export default function GovernanceDashboardPage() {
                 ([reviewer, count]) => (
                   <div
                     key={reviewer}
-                    className="rounded-xl bg-sbi-surface/50 border border-sbi-border/30 p-4"
+                    className="rounded-xl bg-brand-surface/50 border border-brand-border/30 p-4"
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -185,7 +185,7 @@ export default function GovernanceDashboardPage() {
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="text-2xl font-bold text-sbi.highlight">
+                        <p className="text-2xl font-bold text-brand.highlight">
                           {count}
                         </p>
                         <Badge variant="default">In Queue</Badge>
@@ -199,7 +199,7 @@ export default function GovernanceDashboardPage() {
         </div>
 
         {/* Top Fairness Flags */}
-        <section className="mt-8 rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
+        <section className="mt-8 rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
           <h2 className="text-lg font-semibold text-white">
             Top Fairness Alerts
           </h2>
@@ -207,7 +207,7 @@ export default function GovernanceDashboardPage() {
             {mockMetrics.topFairnessFlags.map((flag) => (
               <div
                 key={flag.flag}
-                className="rounded-xl bg-sbi-surface/50 border border-amber-500/20 p-4"
+                className="rounded-xl bg-brand-surface/50 border border-amber-500/20 p-4"
               >
                 <p className="text-sm font-semibold text-white">{flag.flag}</p>
                 <p className="mt-2 text-2xl font-bold text-amber-400">
@@ -222,7 +222,7 @@ export default function GovernanceDashboardPage() {
         </section>
 
         {/* Policy Violations Trend */}
-        <section className="mt-8 rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
+        <section className="mt-8 rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
           <h2 className="text-lg font-semibold text-white">
             Weekly Policy Violations
           </h2>
@@ -234,7 +234,7 @@ export default function GovernanceDashboardPage() {
               >
                 <div className="w-full flex flex-col items-center">
                   <div
-                    className="w-full rounded-t bg-gradient-to-t from-sbi.accent to-sbi.highlight transition-all"
+                    className="w-full rounded-t bg-gradient-to-t from-brand.accent to-brand.highlight transition-all"
                     style={{
                       height: `${Math.max(10, (day.count / 20) * 100)}%`,
                     }}
@@ -250,7 +250,7 @@ export default function GovernanceDashboardPage() {
         </section>
 
         {/* Compliance Status */}
-        <section className="mt-8 rounded-2xl border border-sbi-border bg-sbi-panel/80 p-6">
+        <section className="mt-8 rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
           <h2 className="text-lg font-semibold text-white">
             Compliance Status
           </h2>
