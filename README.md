@@ -4,11 +4,6 @@ Finora is a governance-first, agentic AI platform for digital banking acquisitio
 
 The product is designed for modern financial institutions that want AI-driven growth without losing control over compliance, operational oversight, and customer trust.
 
-## Live demo
-
-- Vercel: https://agentic-ai-customer-acquisition.vercel.app/
-- GitHub: https://github.com/kunalchoubey1108-png/Finora.git
-
 ## Why Finora
 
 Finora turns the banking acquisition journey into an accountable workflow that blends:
@@ -38,15 +33,15 @@ Finora provides a simulated, end-to-end acquisition flow for banks and financial
 
 ### Dashboard overview
 
-![Finora dashboard](public/screenshots/finora-dashboard.svg)
+![Finora dashboard](https://image.thum.io/get/width/1400/https://finora-sigma-nine.vercel.app/)
 
 ### Agent orchestration flow
 
-![Finora orchestration flow](public/screenshots/finora-agent-flow.svg)
+![Finora orchestration flow](https://image.thum.io/get/width/1400/https://finora-sigma-nine.vercel.app/agent-flow)
 
 ### Governance and KYC control center
 
-![Finora governance and KYC](public/screenshots/finora-governance.svg)
+![Finora governance and KYC](https://image.thum.io/get/width/1400/https://finora-sigma-nine.vercel.app/governance)
 
 ## Key features
 
@@ -125,6 +120,20 @@ Copy the example environment file if needed:
 
 ```bash
 cp .env.example .env.local
+```
+
+Before placing any live CALL-E calls in production or Vercel, add the following environment variable in the deployment platform:
+
+- `CALLE_TOKEN_CACHE_JSON` — the raw JSON content of the CALL-E token cache (`token.json` from the CALL-E CLI auth flow)
+- `CALLE_SERVER_URL` — optional, only if you are using a non-default CALL-E MCP endpoint
+
+Example Vercel setup:
+
+```text
+Project → Settings → Environment Variables
+
+CALLE_TOKEN_CACHE_JSON = {"token":{"access_token":"...","token_type":"Bearer","expires_in":3600}}
+CALLE_SERVER_URL = https://seleven-mcp-sg.airudder.com/mcp/openagent_oauth
 ```
 
 This project supports optional call-center and external integration configuration for CALL-E based interactions. Demo flows work without live credentials, while live execution paths rely on environment-specific values.
