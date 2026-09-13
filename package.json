@@ -1,7 +1,10 @@
 {
-  "name": "sbi-agentic-ai",
+  "name": "finora",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +12,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "@call-e/cli": "^0.5.0",
+    "next": "14.2.33",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },

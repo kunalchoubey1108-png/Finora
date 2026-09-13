@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     }
 
     const goal = buildOfferExplainGoal(lead, offerResult, bankId);
-    const run = startCall({
+    const run = await startCall({
       toPhone,
       goal,
       language: lead.preferredLanguage,

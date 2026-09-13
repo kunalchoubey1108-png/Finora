@@ -4,9 +4,9 @@ import { BankProvider } from "../components/BankContext";
 import Header from "../components/Header";
 
 export const metadata: Metadata = {
-  title: "Agentic Bank Onboarding Platform",
+  title: "Finora | Agentic Bank Onboarding Platform",
   description:
-    "White-labelable agentic AI platform for bank customer acquisition and digital onboarding.",
+    "Finora is an agentic AI platform for bank customer acquisition, personalized offers, governance, and compliant digital onboarding.",
 };
 
 export default function RootLayout({

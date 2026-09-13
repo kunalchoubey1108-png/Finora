@@ -87,75 +87,75 @@ export default function AgentFlowPage() {
   const duration = formatDuration(report.startedAt, report.finishedAt);
 
   return (
-    <main className="min-h-screen bg-brand-surface text-slate-100">
-      <div className="mx-auto max-w-7xl px-6 py-10">
+    <main className="editorial-page">
+      <div className="editorial-container py-10 md:py-16">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-brand.highlight hover:text-brand.accent transition"
+          className="text-sm text-[#17191c] hover:underline"
         >
-          ← Back to Dashboard
+          ← Back to dashboard
         </Link>
 
-        <section className="mt-8 rounded-[2rem] border border-brand-border bg-brand-panel/90 p-8 shadow-panel backdrop-blur-xl">
-          <div className="space-y-4">
-            <Badge>Multi-Agent Orchestration Flow</Badge>
-            <h1 className="text-4xl font-semibold text-white">
-              Agent Execution Pipeline
-            </h1>
-            <p className="max-w-3xl text-lg text-brand.muted">
-              Execution ID:{" "}
-              <code className="text-brand.highlight">{report.executionId}</code>
-            </p>
+        <section className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div>
+            <p className="editorial-eyebrow">Live orchestration trace</p>
+            <h1 className="editorial-title mt-3 max-w-3xl">Every decision, <em>made visible.</em></h1>
+            <p className="editorial-subhead mt-5">Inspect the agent sequence, the reasoning behind every recommendation, and the point where human review is required.</p>
           </div>
+          <div className="editorial-peach p-6">
+            <p className="text-sm">Selected lead</p>
+            <p className="font-display mt-2 text-3xl tracking-[-0.03em]">{report.selectedLeadName}</p>
+            <p className="mt-3 text-sm">{report.selectedLeadSegment} · {report.journeyState.humanActionRequired ? "Review required" : "Auto path complete"}</p>
+          </div>
+        </section>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-4">
+        <section className="mt-10 grid gap-4 md:grid-cols-4">
             <div className="rounded-2xl bg-brand-surface p-6">
-              <p className="text-xs uppercase text-brand.muted">Started</p>
+              <p className="editorial-eyebrow">Started</p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {formatTimestamp(report.startedAt)}
               </p>
             </div>
             <div className="rounded-2xl bg-brand-surface p-6">
-              <p className="text-xs uppercase text-brand.muted">Duration</p>
+              <p className="editorial-eyebrow">Duration</p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {duration}
               </p>
             </div>
             <div className="rounded-2xl bg-brand-surface p-6">
-              <p className="text-xs uppercase text-brand.muted">Agent Count</p>
+              <p className="editorial-eyebrow">Agent count</p>
               <p className="mt-2 text-sm font-semibold text-white">
                 {report.agentResults.length}
               </p>
             </div>
             <div className="rounded-2xl bg-brand-surface p-6">
-              <p className="text-xs uppercase text-brand.muted">Lead Selected</p>
+              <p className="editorial-eyebrow">Execution ID</p>
               <p className="mt-2 text-sm font-semibold text-white">
-                {report.selectedLeadName}
+                {report.executionId.slice(-12)}
               </p>
             </div>
-          </div>
         </section>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.5fr]">
+        <div className="mt-12 grid gap-6 lg:grid-cols-[0.82fr_1.45fr]">
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-white">Agent Queue</h2>
+            <div><p className="editorial-eyebrow">Decision path</p><h2 className="font-display mt-1 text-3xl tracking-[-0.03em]">Agent sequence</h2></div>
             <div className="space-y-2">
               {report.agentResults.map((agent: AgentExecutionResult) => (
                 <button
                   key={agent.auditLogId}
                   onClick={() => setSelectedAgent(agent)}
-                  className={`w-full rounded-xl border p-4 text-left transition ${
+                  className={`w-full rounded-2xl border p-5 text-left transition ${
                     selectedAgent?.auditLogId === agent.auditLogId
-                      ? "border-brand.accent bg-brand-panel/80"
-                      : "border-brand-border bg-brand-surface/50 hover:border-brand.accent/50"
+                      ? "border-[#17191c] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
+                      : "border-transparent bg-[#f2f2f3] hover:bg-white"
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <div>
-                      <p className="font-semibold text-white">
+                      <p className="text-sm font-medium text-[#17191c]">
                         {agent.agentName}
                       </p>
-                      <p className="mt-1 text-xs text-brand.muted line-clamp-1">
+                      <p className="mt-2 text-xs leading-5 text-[#777b86] line-clamp-2">
                         {agent.decision}
                       </p>
                     </div>
@@ -169,14 +169,15 @@ export default function AgentFlowPage() {
           </div>
 
           {selectedAgent && (
-            <div className="rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
-              <h3 className="text-lg font-semibold text-white">
+            <div className="editorial-artifact p-6 md:p-8">
+              <p className="editorial-eyebrow">Selected agent</p>
+              <h3 className="font-display mt-2 text-4xl tracking-[-0.03em]">
                 {selectedAgent.agentName}
               </h3>
 
-              <div className="mt-4 space-y-4">
+              <div className="mt-8 space-y-6">
                 <div>
-                  <p className="text-xs uppercase text-brand.muted">Status</p>
+                  <p className="editorial-eyebrow">Status</p>
                   <div className="mt-2">
                     <Badge
                       variant={getStatusBadgeVariant(selectedAgent.status)}
@@ -187,11 +188,11 @@ export default function AgentFlowPage() {
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-brand.muted">Confidence</p>
+                  <p className="editorial-eyebrow">Confidence</p>
                   <div className="mt-2 flex items-center gap-3">
                     <div className="flex-1 rounded-full bg-brand-surface h-2">
                       <div
-                        className="h-2 rounded-full bg-gradient-to-r from-brand.accent to-brand.highlight"
+                        className="h-2 rounded-full bg-[#17191c]"
                         style={{
                           width: `${selectedAgent.confidence}%`,
                         }}
@@ -204,21 +205,21 @@ export default function AgentFlowPage() {
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-brand.muted">Decision</p>
-                  <p className="mt-2 text-sm text-slate-100">
+                  <p className="editorial-eyebrow">Decision</p>
+                  <p className="mt-2 text-sm leading-6 text-[#17191c]">
                     {selectedAgent.decision}
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-brand.muted">Reasoning</p>
-                  <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                  <p className="editorial-eyebrow">Reasoning</p>
+                  <p className="mt-2 text-sm text-[#777b86] leading-6">
                     {selectedAgent.reasoningSummary}
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-brand.muted">
+                  <p className="editorial-eyebrow">
                     Execution Time
                   </p>
                   <p className="mt-2 text-sm text-slate-100">
@@ -227,15 +228,15 @@ export default function AgentFlowPage() {
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-brand.muted">Input</p>
-                  <pre className="mt-2 rounded-lg bg-brand-surface p-3 text-xs overflow-auto max-h-[150px]">
+                  <p className="editorial-eyebrow">Agent input</p>
+                  <pre className="mt-2 rounded-2xl bg-[#f2f2f3] p-4 text-xs overflow-auto max-h-[150px] text-[#17191c]">
                     {JSON.stringify(selectedAgent.input, null, 2)}
                   </pre>
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase text-brand.muted">Output</p>
-                  <pre className="mt-2 rounded-lg bg-brand-surface p-3 text-xs overflow-auto max-h-[200px]">
+                  <p className="editorial-eyebrow">Agent output</p>
+                  <pre className="mt-2 rounded-2xl bg-[#f2f2f3] p-4 text-xs overflow-auto max-h-[200px] text-[#17191c]">
                     {JSON.stringify(selectedAgent.output, null, 2)}
                   </pre>
                 </div>
@@ -244,55 +245,45 @@ export default function AgentFlowPage() {
           )}
         </div>
 
-        <section className="mt-8 rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
-          <h2 className="text-lg font-semibold text-white">
-            Execution Timeline
-          </h2>
-          <div className="mt-6 space-y-6">
+        <section className="mt-12 bg-[#fafafb] p-6 md:p-10">
+          <p className="editorial-eyebrow">System record</p>
+          <h2 className="font-display mt-2 text-4xl tracking-[-0.03em]">Execution timeline</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {report.timeline.map(
               (step: (typeof report.timeline)[0], idx: number) => (
-                <div key={idx} className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="rounded-full bg-brand.accent w-3 h-3" />
-                    {idx < report.timeline.length - 1 && (
-                      <div className="w-1 h-16 bg-brand-border/50 mt-1" />
-                    )}
+                <div key={idx} className="rounded-2xl bg-white p-5">
+                    <p className="text-xs text-[#979799]">{String(idx + 1).padStart(2, "0")}</p>
+                    <p className="mt-3 text-sm font-medium text-[#17191c]">{step.step}</p>
+                    <p className="mt-2 text-sm leading-6 text-[#777b86]">{step.detail}</p>
                   </div>
-                  <div className="pb-4">
-                    <p className="font-semibold text-white">{step.step}</p>
-                    <p className="mt-1 text-sm text-slate-300">{step.detail}</p>
-                  </div>
-                </div>
               ),
             )}
           </div>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-brand-border bg-brand-panel/80 p-6">
-          <h2 className="text-lg font-semibold text-white">
-            Governance Summary
-          </h2>
+        <section className="mt-12 grid gap-6 md:grid-cols-[0.75fr_1.25fr]">
+          <div><p className="editorial-eyebrow">Governance</p><h2 className="editorial-section-title mt-2">Review, where it matters.</h2></div>
+          <div className="editorial-card p-6">
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <div className="rounded-xl bg-brand-surface p-4">
-              <p className="text-xs uppercase text-brand.muted">Review Level</p>
+            <div className="rounded-2xl bg-white p-4">
+              <p className="editorial-eyebrow">Review level</p>
               <p className="mt-2 font-semibold text-white">
                 {report.governance.reviewLevel}
               </p>
             </div>
-            <div className="rounded-xl bg-brand-surface p-4">
-              <p className="text-xs uppercase text-brand.muted">
-                Recommended Reviewer
-              </p>
+            <div className="rounded-2xl bg-white p-4">
+              <p className="editorial-eyebrow">Recommended reviewer</p>
               <p className="mt-2 font-semibold text-white">
                 {report.governance.recommendedReviewer}
               </p>
             </div>
-            <div className="col-span-full rounded-xl bg-brand-surface p-4">
-              <p className="text-xs uppercase text-brand.muted">Risk Note</p>
-              <p className="mt-2 text-sm text-slate-100 leading-relaxed">
+            <div className="col-span-full rounded-2xl bg-white p-4">
+              <p className="editorial-eyebrow">Risk note</p>
+              <p className="mt-2 text-sm text-[#777b86] leading-6">
                 {report.governance.riskNote}
               </p>
             </div>
+          </div>
           </div>
         </section>
       </div>

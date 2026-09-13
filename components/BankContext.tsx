@@ -12,30 +12,31 @@ const BankContext = createContext<BankContextType | undefined>(undefined);
 
 export function BankProvider({ children }: { children: React.ReactNode }) {
   const [activeBank, setActiveBank] = useState<BankConfig>(() => {
-    // Default fallback
-    return bankRegistry.sbi;
+    if (typeof window === "undefined") {
+      return bankRegistry.default;
+    }
+
+    const savedBankId = window.localStorage.getItem("active-bank-id");
+    return getBankConfig(savedBankId ?? "default");
   });
 
   useEffect(() => {
-    // Load from localStorage on client side
-    const saved = localStorage.getItem("active-bank-id");
-    if (saved && bankRegistry[saved]) {
-      setActiveBank(bankRegistry[saved]);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Apply dataset attribute to document root
     if (typeof document !== "undefined") {
       document.documentElement.setAttribute("data-theme", activeBank.theme);
+    }
+
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("active-bank-id", activeBank.id);
     }
   }, [activeBank]);
 
   const setBank = (bankId: string) => {
     if (bankRegistry[bankId]) {
       setActiveBank(bankRegistry[bankId]);
-      localStorage.setItem("active-bank-id", bankId);
+      return;
     }
+
+    setActiveBank(bankRegistry.default);
   };
 
   return (

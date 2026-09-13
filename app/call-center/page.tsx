@@ -96,10 +96,10 @@ const DEMO_ONBOARDING = {
 };
 
 // ─── Agent colour map ─────────────────────────────────────────────────────────
-const agentConfig: Record<AgentType, { label: string; color: string; emoji: string }> = {
-  outreach: { label: "Lead Outreach", color: "#3b82f6", emoji: "📞" },
-  "offer-explain": { label: "Offer Explanation", color: "#10b981", emoji: "🏦" },
-  support: { label: "Customer Support", color: "#8b5cf6", emoji: "🎧" },
+const agentConfig: Record<AgentType, { label: string; description: string; emoji: string }> = {
+  outreach: { label: "Lead outreach", description: "Introduce the bank and qualify interest.", emoji: "01" },
+  "offer-explain": { label: "Offer explanation", description: "Explain a personalized offer after interest.", emoji: "02" },
+  support: { label: "Customer support", description: "Resolve KYC and onboarding questions.", emoji: "03" },
 };
 
 // ─── Status badge colours ─────────────────────────────────────────────────────
@@ -118,6 +118,7 @@ export default function CallCenterPage() {
   const [calls, setCalls] = useState<CallRecord[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   const addCallRecord = useCallback(
     (agent: AgentType, leadName: string, toPhone: string, data: Record<string, unknown>): CallRecord => {
@@ -138,7 +139,11 @@ export default function CallCenterPage() {
   );
 
   const triggerCall = useCallback(async () => {
-    if (!phone) return alert("Enter a phone number first (e.g. +91XXXXXXXXXX)");
+    if (!phone) {
+      setNotice("Enter a phone number in international format, for example +919876543210.");
+      return;
+    }
+    setNotice(null);
     setLoading(true);
     try {
       let endpoint = "";
@@ -163,12 +168,14 @@ export default function CallCenterPage() {
       const data = await res.json();
 
       if (data?.ok) {
-        addCallRecord(activeAgent, DEMO_LEAD.name, phone, data);
+        const record = addCallRecord(activeAgent, DEMO_LEAD.name, phone, data);
+        setSelectedCallId(record.id);
+        setNotice("Call request accepted. Refresh its status to retrieve live results.");
       } else {
-        alert("Call failed: " + (data?.error ?? "unknown error"));
+        setNotice("Call failed: " + (data?.error ?? "Unknown error"));
       }
     } catch (e) {
-      alert("Network error: " + String(e));
+      setNotice("Network error: " + String(e));
     } finally {
       setLoading(false);
     }
@@ -202,188 +209,49 @@ export default function CallCenterPage() {
   const selected = calls.find((c) => c.id === selectedCallId) ?? null;
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--brand-bg, #031026)", color: "#e3edff", fontFamily: "Inter, sans-serif" }}>
-      {/* Header */}
-      <header style={{ borderBottom: "1px solid var(--brand-border, #143b75)", padding: "1.25rem 2rem", display: "flex", alignItems: "center", gap: "1rem" }}>
-        <span style={{ fontSize: "1.5rem" }}>📞</span>
-        <div>
-          <h1 style={{ margin: 0, fontSize: "1.25rem", fontWeight: 700, color: "#7ec7ff" }}>CALL-E Call Center</h1>
-          <p style={{ margin: 0, fontSize: ".8rem", color: "#9cb7d4" }}>AI Phone Agents — Lead Outreach · Offer Explanation · Customer Support</p>
-        </div>
-      </header>
+    <main className="editorial-page">
+      <div className="editorial-container py-10 md:py-16">
+        <section className="mb-10 max-w-3xl">
+          <p className="editorial-eyebrow">CALL-E workspace</p>
+          <h1 className="editorial-section-title mt-3">Calls with context, <em>not guesswork.</em></h1>
+          <p className="editorial-subhead mt-4">Choose a governed phone agent, confirm the lead context, and follow each call through its live outcome.</p>
+        </section>
 
-      <div style={{ display: "flex", gap: "1.5rem", padding: "2rem", maxWidth: 1280, margin: "0 auto", flexWrap: "wrap" }}>
-
-        {/* ── Left panel: Controls ── */}
-        <div style={{ flex: "0 0 340px", background: "var(--brand-panel, #081c42)", borderRadius: 12, padding: "1.5rem", border: "1px solid var(--brand-border, #143b75)" }}>
-          <h2 style={{ margin: "0 0 1.25rem", fontSize: "1rem", color: "#7ec7ff" }}>Trigger a Call</h2>
-
-          {/* Agent selector */}
-          <div style={{ marginBottom: "1rem" }}>
-            <label style={{ display: "block", marginBottom: ".4rem", fontSize: ".8rem", color: "#9cb7d4" }}>Agent Type</label>
-            <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
-              {(Object.keys(agentConfig) as AgentType[]).map((a) => (
-                <button
-                  key={a}
-                  onClick={() => setActiveAgent(a)}
-                  style={{
-                    padding: ".4rem .9rem",
-                    borderRadius: 9999,
-                    border: `2px solid ${activeAgent === a ? agentConfig[a].color : "transparent"}`,
-                    background: activeAgent === a ? agentConfig[a].color + "22" : "transparent",
-                    color: activeAgent === a ? agentConfig[a].color : "#9cb7d4",
-                    cursor: "pointer",
-                    fontSize: ".8rem",
-                    fontWeight: 600,
-                  }}
-                >
-                  {agentConfig[a].emoji} {agentConfig[a].label}
+        <div className="grid gap-6 xl:grid-cols-[360px_minmax(0,1fr)_340px]">
+          <section className="editorial-card h-fit p-6">
+            <p className="editorial-eyebrow">New call</p>
+            <h2 className="font-display mt-2 text-3xl tracking-[-0.03em]">Choose an agent.</h2>
+            <div className="mt-6 space-y-2">
+              {(Object.keys(agentConfig) as AgentType[]).map((agent) => (
+                <button key={agent} type="button" onClick={() => setActiveAgent(agent)} className={`w-full rounded-2xl border p-4 text-left transition ${activeAgent === agent ? "border-[#17191c] bg-white" : "border-transparent bg-white/50 hover:bg-white"}`}>
+                  <div className="flex items-center justify-between gap-3"><span className="text-xs text-[#979799]">{agentConfig[agent].emoji}</span><span className="text-sm font-medium text-[#17191c]">{agentConfig[agent].label}</span></div>
+                  <p className="mt-2 text-sm leading-5 text-[#777b86]">{agentConfig[agent].description}</p>
                 </button>
               ))}
             </div>
-          </div>
-
-          {/* Phone input */}
-          <div style={{ marginBottom: "1rem" }}>
-            <label style={{ display: "block", marginBottom: ".4rem", fontSize: ".8rem", color: "#9cb7d4" }}>Lead Phone Number</label>
-            <input
-              type="tel"
-              placeholder="+91XXXXXXXXXX"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              style={{ width: "100%", padding: ".6rem .8rem", borderRadius: 8, border: "1px solid var(--brand-border, #143b75)", background: "var(--brand-surface, #06112d)", color: "#e3edff", fontSize: ".9rem", boxSizing: "border-box" }}
-            />
-          </div>
-
-          {/* Bank selector */}
-          <div style={{ marginBottom: "1.5rem" }}>
-            <label style={{ display: "block", marginBottom: ".4rem", fontSize: ".8rem", color: "#9cb7d4" }}>Bank ID (theme)</label>
-            <select
-              value={bankId}
-              onChange={(e) => setBankId(e.target.value)}
-              style={{ width: "100%", padding: ".6rem .8rem", borderRadius: 8, border: "1px solid var(--brand-border, #143b75)", background: "var(--brand-surface, #06112d)", color: "#e3edff", fontSize: ".9rem", boxSizing: "border-box" }}
-            >
-              <option value="default">Default</option>
-              <option value="apex">Apex Bank</option>
-              <option value="horizon">Horizon Bank</option>
-              <option value="stellar">Stellar Bank</option>
-            </select>
-          </div>
-
-          {/* Demo lead info */}
-          <div style={{ background: "rgba(29,139,255,.08)", borderRadius: 8, padding: "1rem", marginBottom: "1.5rem", fontSize: ".8rem", color: "#9cb7d4" }}>
-            <div style={{ fontWeight: 600, color: "#7ec7ff", marginBottom: ".5rem" }}>Demo Lead: {DEMO_LEAD.name}</div>
-            <div>City: {DEMO_LEAD.city} · Age: {DEMO_LEAD.age}</div>
-            <div>Segment: {DEMO_LEAD.segment}</div>
-            <div>Conversion: {DEMO_LEAD.score.conversionProbability}%</div>
-            <div style={{ marginTop: ".4rem", fontStyle: "italic" }}>{DEMO_LEAD.challengeSummary}</div>
-          </div>
-
-          <button
-            onClick={triggerCall}
-            disabled={loading}
-            style={{
-              width: "100%",
-              padding: ".8rem",
-              borderRadius: 10,
-              border: "none",
-              background: loading ? "#334155" : agentConfig[activeAgent].color,
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: "1rem",
-              cursor: loading ? "not-allowed" : "pointer",
-              transition: "background .2s",
-            }}
-          >
-            {loading ? "Initiating Call…" : `${agentConfig[activeAgent].emoji} Start ${agentConfig[activeAgent].label} Call`}
-          </button>
-        </div>
-
-        {/* ── Middle panel: Call Log ── */}
-        <div style={{ flex: "1 1 320px", minWidth: 0 }}>
-          <h2 style={{ margin: "0 0 1rem", fontSize: "1rem", color: "#7ec7ff" }}>Call Log ({calls.length})</h2>
-          {calls.length === 0 && (
-            <div style={{ color: "#9cb7d4", fontSize: ".9rem", padding: "2rem", textAlign: "center", background: "var(--brand-panel, #081c42)", borderRadius: 12, border: "1px solid var(--brand-border, #143b75)" }}>
-              No calls yet. Trigger one from the left panel.
+            <div className="mt-6 space-y-4">
+              <label className="block text-sm text-[#17191c]">Lead phone number<input type="tel" placeholder="+919876543210" value={phone} onChange={(e) => setPhone(e.target.value)} className="mt-2 w-full rounded-2xl border border-[#ececec] bg-white px-4 py-3 outline-none placeholder:text-[#a3a6af] focus:border-[#17191c]" /></label>
+              <label className="block text-sm text-[#17191c]">Acquiring institution<select value={bankId} onChange={(e) => setBankId(e.target.value)} className="mt-2 w-full rounded-2xl border border-[#ececec] bg-white px-4 py-3 outline-none focus:border-[#17191c]"><option value="default">Default Bank</option><option value="sbi">State Bank of India</option><option value="apex">Apex Bank</option><option value="horizon">Horizon Bank</option><option value="stellar">Stellar Bank</option></select></label>
             </div>
-          )}
-          <div style={{ display: "flex", flexDirection: "column", gap: ".75rem" }}>
-            {calls.map((call) => (
-              <div
-                key={call.id}
-                onClick={() => setSelectedCallId(call.id === selectedCallId ? null : call.id)}
-                style={{
-                  background: "var(--brand-panel, #081c42)",
-                  borderRadius: 10,
-                  padding: "1rem 1.25rem",
-                  border: `1px solid ${selectedCallId === call.id ? agentConfig[call.agent].color : "var(--brand-border, #143b75)"}`,
-                  cursor: "pointer",
-                  transition: "border-color .15s",
-                }}
-              >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: ".4rem" }}>
-                  <span style={{ fontWeight: 600, color: agentConfig[call.agent].color, fontSize: ".9rem" }}>
-                    {agentConfig[call.agent].emoji} {agentConfig[call.agent].label}
-                  </span>
-                  <span style={{ fontSize: ".75rem", padding: ".2rem .6rem", borderRadius: 9999, background: statusColor(call.status) + "22", color: statusColor(call.status), fontWeight: 600 }}>
-                    {call.status}
-                  </span>
-                </div>
-                <div style={{ fontSize: ".85rem", color: "#e3edff" }}>{call.leadName} · {call.toPhone}</div>
-                <div style={{ fontSize: ".75rem", color: "#9cb7d4", marginTop: ".3rem" }}>
-                  {call.timestamp}
-                  {call.runId && <span style={{ marginLeft: ".5rem" }}>run: {call.runId.slice(0, 12)}…</span>}
-                </div>
-                <button
-                  onClick={(e) => { e.stopPropagation(); refreshStatus(call); }}
-                  style={{ marginTop: ".6rem", fontSize: ".75rem", padding: ".25rem .7rem", borderRadius: 9999, border: "1px solid var(--brand-border, #143b75)", background: "transparent", color: "#9cb7d4", cursor: "pointer" }}
-                >
-                  ↻ Refresh Status
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
+            <div className="mt-6 rounded-2xl bg-[#fbe1d1] p-4 text-[#5d2a1a]"><p className="text-xs">Selected demo lead</p><p className="mt-1 font-medium">{DEMO_LEAD.name} · {DEMO_LEAD.city}</p><p className="mt-2 text-sm leading-5">{DEMO_LEAD.segment} · {DEMO_LEAD.score.conversionProbability}% conversion confidence</p></div>
+            <button type="button" onClick={triggerCall} disabled={loading} className="editorial-pill editorial-pill--filled mt-6 w-full disabled:cursor-wait disabled:opacity-60">{loading ? "Starting call…" : `Start ${agentConfig[activeAgent].label}`}</button>
+          </section>
 
-        {/* ── Right panel: Detail ── */}
-        {selected && (
-          <div style={{ flex: "0 0 320px", background: "var(--brand-panel, #081c42)", borderRadius: 12, padding: "1.5rem", border: "1px solid var(--brand-border, #143b75)", fontSize: ".85rem" }}>
-            <h2 style={{ margin: "0 0 1rem", fontSize: "1rem", color: "#7ec7ff" }}>Call Detail</h2>
-            <div style={{ display: "grid", gap: ".5rem" }}>
-              <Row label="Agent" value={`${agentConfig[selected.agent].emoji} ${agentConfig[selected.agent].label}`} />
-              <Row label="Lead" value={selected.leadName} />
-              <Row label="Phone" value={selected.toPhone} />
-              <Row label="Status" value={selected.status} valueColor={statusColor(selected.status)} />
-              {selected.planId && <Row label="Plan ID" value={selected.planId} mono />}
-              {selected.runId && <Row label="Run ID" value={selected.runId} mono />}
-              {selected.sentimentScore !== undefined && (
-                <Row label="Sentiment" value={`${selected.sentimentScore}/100`} />
-              )}
-            </div>
-            {selected.summary && (
-              <div style={{ marginTop: "1rem" }}>
-                <div style={{ color: "#9cb7d4", marginBottom: ".3rem", fontSize: ".8rem" }}>Summary</div>
-                <div style={{ background: "var(--brand-surface, #06112d)", borderRadius: 8, padding: ".75rem", lineHeight: 1.6 }}>{selected.summary}</div>
-              </div>
-            )}
-            {selected.transcript && (
-              <div style={{ marginTop: "1rem" }}>
-                <div style={{ color: "#9cb7d4", marginBottom: ".3rem", fontSize: ".8rem" }}>Transcript</div>
-                <div style={{ background: "var(--brand-surface, #06112d)", borderRadius: 8, padding: ".75rem", maxHeight: 220, overflowY: "auto", lineHeight: 1.6, whiteSpace: "pre-wrap" }}>{selected.transcript}</div>
-              </div>
-            )}
-          </div>
-        )}
+          <section>
+            <div className="mb-4 flex items-end justify-between"><div><p className="editorial-eyebrow">Activity</p><h2 className="font-display mt-1 text-3xl tracking-[-0.03em]">Call log</h2></div><span className="text-sm text-[#777b86]">{calls.length} {calls.length === 1 ? "call" : "calls"}</span></div>
+            {notice && <p role="status" className="mb-4 rounded-2xl border border-[#ececec] bg-white px-4 py-3 text-sm leading-6 text-[#5d2a1a]">{notice}</p>}
+            {calls.length === 0 ? <div className="editorial-artifact px-8 py-16 text-center"><p className="font-display text-3xl tracking-[-0.03em]">No calls yet.</p><p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-[#777b86]">Select an agent, add a phone number, then start a governed call from the panel.</p></div> : <div className="space-y-3">{calls.map((call) => <article key={call.id} className={`editorial-artifact p-5 transition ${selectedCallId === call.id ? "ring-1 ring-[#17191c]" : ""}`}><button type="button" onClick={() => setSelectedCallId(call.id === selectedCallId ? null : call.id)} className="block w-full text-left"><div className="flex flex-wrap items-center justify-between gap-3"><div><p className="text-sm font-medium text-[#17191c]">{agentConfig[call.agent].label}</p><p className="mt-1 text-sm text-[#777b86]">{call.leadName} · {call.toPhone}</p></div><span className="rounded-full px-3 py-1 text-xs font-medium" style={{ color: statusColor(call.status), backgroundColor: `${statusColor(call.status)}18` }}>{call.status.replace(/_/g, " ")}</span></div><p className="mt-4 text-xs text-[#979799]">{call.timestamp}{call.runId ? ` · Run ${call.runId.slice(0, 12)}…` : ""}</p></button><button type="button" onClick={() => refreshStatus(call)} className="mt-4 text-sm text-[#17191c] hover:underline">Refresh live status →</button></article>)}</div>}
+          </section>
+
+          <aside className="editorial-card h-fit p-6 xl:sticky xl:top-24">
+            <p className="editorial-eyebrow">Call detail</p>
+            {selected ? <><h2 className="font-display mt-2 text-3xl tracking-[-0.03em]">{agentConfig[selected.agent].label}</h2><dl className="mt-6 space-y-4 text-sm"><Detail label="Lead" value={selected.leadName} /><Detail label="Phone" value={selected.toPhone} /><Detail label="Status" value={selected.status.replace(/_/g, " ")} color={statusColor(selected.status)} />{selected.planId && <Detail label="Plan ID" value={selected.planId} mono />}{selected.runId && <Detail label="Run ID" value={selected.runId} mono />}{selected.sentimentScore !== undefined && <Detail label="Sentiment" value={`${selected.sentimentScore}/100`} />}</dl>{selected.summary && <DetailBlock title="Summary">{selected.summary}</DetailBlock>}{selected.transcript && <DetailBlock title="Transcript"><pre className="whitespace-pre-wrap font-sans">{selected.transcript}</pre></DetailBlock>}<button type="button" onClick={() => refreshStatus(selected)} className="editorial-pill editorial-pill--ghost mt-6 w-full">Refresh status</button></> : <div className="mt-8 rounded-2xl bg-white p-5 text-sm leading-6 text-[#777b86]">Choose a call from the log to see its identifiers, status, summary, and transcript.</div>}
+          </aside>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
 
-function Row({ label, value, mono, valueColor }: { label: string; value: string; mono?: boolean; valueColor?: string }) {
-  return (
-    <div style={{ display: "flex", gap: ".5rem" }}>
-      <span style={{ color: "#9cb7d4", minWidth: 90 }}>{label}</span>
-      <span style={{ color: valueColor ?? "#e3edff", fontFamily: mono ? "monospace" : undefined, fontSize: mono ? ".8rem" : undefined, wordBreak: "break-all" }}>{value}</span>
-    </div>
-  );
-}
+function Detail({ label, value, mono, color }: { label: string; value: string; mono?: boolean; color?: string }) { return <div><dt className="text-xs text-[#979799]">{label}</dt><dd className={`mt-1 break-all text-[#17191c] ${mono ? "font-mono text-xs" : ""}`} style={{ color }}>{value}</dd></div>; }
+function DetailBlock({ title, children }: { title: string; children: React.ReactNode }) { return <section className="mt-6"><p className="text-xs text-[#979799]">{title}</p><div className="mt-2 max-h-56 overflow-y-auto rounded-2xl bg-white p-4 text-sm leading-6 text-[#17191c]">{children}</div></section>; }

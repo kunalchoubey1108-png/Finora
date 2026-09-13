@@ -84,7 +84,7 @@ export const productBundles: OfferCandidate[] = [
   },
   {
     id: "O-005",
-    name: "SBI Digital Saver Account + Cashback Debit",
+    name: "Digital Saver Account + Cashback Debit",
     bundle: "Value Saver Bundle",
     products: ["Digital Saver Account", "Cashback Debit Card"],
     description:

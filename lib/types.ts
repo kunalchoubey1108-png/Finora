@@ -42,7 +42,7 @@ export type CompositeLeadScore = {
   conversionPropensity?: number; // 0-100: likelihood to convert
   expectedValue?: number; // ₹ value: proxy LTV
   onboardingEase?: number; // 0-100: ease of onboarding
-  productAffinity?: number; // 0-100: fit with SBI products
+  productAffinity?: number; // 0-100: fit with the acquiring institution's products
   acquisitionEfficiency?: number; // 0-100: cost vs. value
 
   // Uplift & responsiveness

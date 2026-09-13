@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     if (!runId) {
       return NextResponse.json({ ok: false, error: "runId query param required" }, { status: 400 });
     }
-    const status = getCallStatus(runId);
+    const status = await getCallStatus(runId);
     return NextResponse.json({ ok: true, ...status });
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);

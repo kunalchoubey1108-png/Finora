@@ -14,6 +14,20 @@ export interface BankConfig {
 }
 
 export const bankRegistry: Record<string, BankConfig> = {
+  default: {
+    id: "default",
+    name: "Default Bank",
+    fullName: "Default Bank",
+    tagline: "A Configurable Banking Experience",
+    theme: "sbi",
+    products: {
+      "Urban Growth": "Smart Savings + Lifestyle Credit Card",
+      "Premium Emerging": "Salary Plus Account + Starter Credit Card",
+      "SME Catalyst": "Merchant Current Account + QR Onboarding",
+      "Digital Saver": "Digital Saver Account + Cashback Debit",
+      "Wealth Builder": "Wealth Builder Portfolio + Advisory Suite",
+    },
+  },
   sbi: {
     id: "sbi",
     name: "SBI",
@@ -74,7 +88,7 @@ export const bankRegistry: Record<string, BankConfig> = {
 
 export function getBankConfig(bankId?: string): BankConfig {
   if (!bankId || !bankRegistry[bankId]) {
-    return bankRegistry.sbi; // fallback to sbi
+    return bankRegistry.default;
   }
   return bankRegistry[bankId];
 }
